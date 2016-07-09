@@ -1,0 +1,24 @@
+@import '~styles/colors.scss';
+
+$font-size-xl:              34px;
+$font-size-l:               26px;
+$font-size-m:               18px;
+$font-size-s:               16px;
+$font-size-xs:              12px;
+
+$spacing-xxs:               2px;
+$spacing-xs:                5px;
+$spacing-s:                 10px;
+$spacing-m:                 15px;
+$spacing-l:                 20px;
+$spacing-xl:                30px;
+$spacing-xxl:               40px;
+$spacing-xxxl:              60px;
+
+$fg-color:                  black;
+$fg-gray:                   gray;
+$bg-color:                  pink;
+
+$border-solid:              1px solid $fg-gray;
+$border-dotted:             1px dotted $fg-gray;
+$border-transparent:        1px solid transparent;
