@@ -16,22 +16,22 @@ class Tools extends Component {
     tool: PropTypes.object.isRequired
   };
 
-  crochetAdd10Rows = () => {
+  onCrochetAdd10Rows = () => {
     const { actions: { crochetAddRows } } = this.props;
     crochetAddRows(10);
   };
 
-  crochetAddRow = () => {
+  onCrochetAddRow = () => {
     const { actions: { crochetAddRows } } = this.props;
     crochetAddRows(1);
   };
 
-  crochetAdd10Columns = () => {
+  onCrochetAdd10Columns = () => {
     const { actions: { crochetAddColumns } } = this.props;
     crochetAddColumns(10);
   };
 
-  crochetAddColumn = () => {
+  onCrochetAddColumn = () => {
     const { actions: { crochetAddColumns } } = this.props;
     crochetAddColumns(1);
   };
@@ -43,7 +43,8 @@ class Tools extends Component {
     } = this.props;
 
     return (
-      <div className={classNames(
+      <div
+        className={classNames(
           'tools'
         )}>
         <div className="undo-redo">
@@ -70,16 +71,16 @@ class Tools extends Component {
         ))}
 
         <div className="canvas-control">
-          <div onClick={this.crochetAddRow}>
+          <div onClick={this.onCrochetAddRow}>
             Dodaj wiersz
           </div>
-          <div onClick={this.crochetAdd10Rows}>
+          <div onClick={this.onCrochetAdd10Rows}>
             Dodaj 10 wierszy
           </div>
-          <div onClick={this.crochetAddColumn}>
+          <div onClick={this.onCrochetAddColumn}>
             Dodaj kolumnę
           </div>
-          <div onClick={this.crochetAdd10Columns}>
+          <div onClick={this.onCrochetAdd10Columns}>
             Dodaj 10 kolumn
           </div>
         </div>

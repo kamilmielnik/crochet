@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { PureRender } from 'components/base';
@@ -33,10 +33,8 @@ export default class CrochetCell extends PureRender {
 
   render() {
     const {
-      columnIndex,
       height,
       imageUrl,
-      rowIndex,
       width
     } = this.props;
 

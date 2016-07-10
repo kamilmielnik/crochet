@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { reducer } from 'utils';
 import { TOOLS, TOOL_SQUARE_EMPTY } from 'constants';
 import {
