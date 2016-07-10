@@ -1,0 +1,24 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.tools {
+  .undo-redo {
+    margin-bottom: $spacing-xl;
+  }
+
+  .tool {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.selected {
+      font-weight: bold;
+    }
+  }
+
+  .canvas-control {
+    margin-top: $spacing-xl;
+  }
+}

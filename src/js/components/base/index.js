@@ -1,0 +1,1 @@
+export PureRender from './PureRender';

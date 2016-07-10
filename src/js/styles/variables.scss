@@ -1,10 +1,10 @@
 @import '~styles/colors.scss';
 
-$font-size-xl:              34px;
-$font-size-l:               26px;
-$font-size-m:               18px;
-$font-size-s:               16px;
-$font-size-xs:              12px;
+$font-size-xl:              44px;
+$font-size-l:               36px;
+$font-size-m:               26px;
+$font-size-s:               18px;
+$font-size-xs:              16px;
 
 $spacing-xxs:               2px;
 $spacing-xs:                5px;
@@ -15,10 +15,16 @@ $spacing-xl:                30px;
 $spacing-xxl:               40px;
 $spacing-xxxl:              60px;
 
-$fg-color:                  black;
-$fg-gray:                   gray;
-$bg-color:                  pink;
+$color-primary:             #ff3356;
+$color-primary-light:       #ffc7d1;
+$color-secondary:           #00a4e2;
+$color-secondary-light:     #b5ebff;
+$color-inactive:            #bbccd2;
 
-$border-solid:              1px solid $fg-gray;
-$border-dotted:             1px dotted $fg-gray;
+$fg-color:                  $color-primary;
+$fg-gray:                   gray;
+$bg-color:                  $color-primary-light;
+
+$border-solid:              1px solid $color-inactive;
+$border-dotted:             1px dotted $color-inactive;
 $border-transparent:        1px solid transparent;

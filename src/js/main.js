@@ -4,13 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { Router, browserHistory } from 'react-router';
+import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
 
-const store = configureStore(undefined, browserHistory);
+const store = configureStore(undefined, hashHistory);
 const rootElement = document.getElementById('app');
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(hashHistory, store);
 
 ReactDOM.render(
   <Provider store={store}>

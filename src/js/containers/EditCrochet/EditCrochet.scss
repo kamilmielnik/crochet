@@ -1,0 +1,82 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+$tools-width: 250px;
+$crochet-size: 12px;
+
+.edit-crochet {
+  position: relative;
+  user-select: none;
+
+  .tools-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: $spacing-m $spacing-l;
+  }
+
+  .crochet-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: $tools-width + $spacing-l;
+    right: 0;
+    overflow: auto;
+
+    .crochet {
+      display: table;
+
+      .row {
+        display: table-row;
+        user-select: none;
+
+        .cell {
+          @include const-width($crochet-size);
+          @include const-height($crochet-size);
+
+          position: relative;
+          display: table-cell;
+          background: white;
+          border-right: $border-solid;
+          border-bottom: $border-solid;
+
+          &:first-child {
+            border-left: $border-solid;
+          }
+
+          &:hover {
+            background-color: red;
+          }
+
+          .pattern {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: -1px;
+            width: $crochet-size;
+            height: $crochet-size;
+
+            &.width-2 {
+              width: 2 * $crochet-size;
+            }
+
+            &.height-2 {
+              height: 2 * $crochet-size;
+            }
+          }
+        }
+
+        &:first-child {
+          .cell {
+            border-top: $border-solid;
+
+            .pattern {
+              top: -1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
