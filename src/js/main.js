@@ -40,7 +40,6 @@ function renderContent() {
 
 /*
   TODO
-    - zrobic pranie (!)
     - ostylowac menu
     - dodac persystencje
     - poprawic wyglad obrazkow
