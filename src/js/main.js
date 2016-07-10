@@ -37,3 +37,16 @@ function renderContent() {
     </div>
   );
 }
+
+/*
+  TODO
+    - zrobic pranie (!)
+    - ostylowac menu
+    - dodac persystencje
+    - poprawic wyglad obrazkow
+    - dodac nowe narzedzia (obrocone)
+    - ogarnac drukowanie
+    - dodac zarzadzanie projektami
+    - rozne rozmiary siatki
+    - mirroring siatki
+*/

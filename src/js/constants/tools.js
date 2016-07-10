@@ -16,7 +16,7 @@ export const TOOLS = {
   [TOOL_RECTANGLE_EMPTY]: {
     name: 'Prostokąt',
     toolId: TOOL_RECTANGLE_EMPTY,
-    imageUrl: 'images/tools/tool_rectangle_empty.png',
+    imageUrl: 'images/tools/tool_rectangle_empty.svg',
     width: 2,
     height: 1
   },
@@ -24,7 +24,7 @@ export const TOOLS = {
   [TOOL_RECTANGLE_ENVELOPE]: {
     name: 'Prostokąt koperta',
     toolId: TOOL_RECTANGLE_ENVELOPE,
-    imageUrl: 'images/tools/tool_rectangle_envelope.png',
+    imageUrl: 'images/tools/tool_rectangle_envelope.svg',
     width: 2,
     height: 1
   },
@@ -32,7 +32,7 @@ export const TOOLS = {
   [TOOL_SQUARE_CROSS]: {
     name: 'Kwadrat krzyż',
     toolId: TOOL_SQUARE_CROSS,
-    imageUrl: 'images/tools/tool_square_cross.png',
+    imageUrl: 'images/tools/tool_square_cross.svg',
     width: 1,
     height: 1
   },
@@ -40,7 +40,7 @@ export const TOOLS = {
   [TOOL_SQUARE_EMPTY]: {
     name: 'Kwadrat',
     toolId: TOOL_SQUARE_EMPTY,
-    imageUrl: 'images/tools/tool_square_empty.png',
+    imageUrl: 'images/tools/tool_square_empty.svg',
     width: 1,
     height: 1
   }
