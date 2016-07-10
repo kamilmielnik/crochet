@@ -139,7 +139,10 @@ function isLeftNeighborBlocking(canvas, rowIndex, columnIndex) {
     return false;
   }
 
-  return canvas[rowIndex][columnIndex - 1].width === 2;
+  const toolId = canvas[rowIndex][columnIndex - 1];
+  const { width } = TOOLS[toolId];
+
+  return width === 2;
 }
 
 function isUpperNeighborBlocking(canvas, rowIndex, columnIndex) {
@@ -147,7 +150,10 @@ function isUpperNeighborBlocking(canvas, rowIndex, columnIndex) {
     return false;
   }
 
-  return canvas[rowIndex - 1][columnIndex].height === 2;
+  const toolId = canvas[rowIndex - 1][columnIndex];
+  const { height } = TOOLS[toolId];
+
+  return height === 2;
 }
 
 function isRightNeighborBlocking(canvas, rowIndex, columnIndex) {
