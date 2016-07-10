@@ -16,10 +16,10 @@ export default class CrochetRow extends PureRender {
       <div className="row">
         {row.map((cell, columnIndex) => (
           <CrochetCell
-            {...cell}
             key={columnIndex}
             columnIndex={columnIndex}
             rowIndex={rowIndex}
+            toolId={cell}
             onClick={onCellClick} />
         ))}
       </div>

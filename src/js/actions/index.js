@@ -1,4 +1,5 @@
 import { CROCHET_DEFAULT_WIDTH, CROCHET_DEFAULT_HEIGHT } from 'constants';
+import { ActionCreators as ReduxUndoActionCreators } from 'redux-undo';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
@@ -8,6 +9,8 @@ import {
 } from 'constants/actionTypes';
 
 export { push as redirect } from 'react-router-redux';
+export const redo = ReduxUndoActionCreators.redo;
+export const undo = ReduxUndoActionCreators.undo;
 
 export function crochetAddColumns(numberOfColumns) {
   return {

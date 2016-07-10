@@ -23,10 +23,10 @@ class EditCrochet extends Component {
 
   render() {
     const {
-      actions,
       crochet: {
-        canvas,
-        patterns
+        present: {
+          canvas
+        }
       }
     } = this.props;
 

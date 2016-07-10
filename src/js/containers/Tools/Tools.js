@@ -36,6 +36,16 @@ class Tools extends Component {
     crochetAddColumns(1);
   };
 
+  onRedo = () => {
+    const { actions: { redo } } = this.props;
+    redo();
+  };
+
+  onUndo = () => {
+    const { actions: { undo } } = this.props;
+    undo();
+  };
+
   render() {
     const {
       actions: { toolChoose },
@@ -48,10 +58,10 @@ class Tools extends Component {
           'tools'
         )}>
         <div className="undo-redo">
-          <div className="undo">
+          <div className="undo" onClick={this.onUndo}>
             Cofnij
           </div>
-          <div className="redo">
+          <div className="redo" onClick={this.onRedo}>
             Ponów
           </div>
         </div>

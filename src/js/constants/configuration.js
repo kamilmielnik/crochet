@@ -1,4 +1,4 @@
-import _ from 'underscore';
+export const CROCHET_DEFAULT_WIDTH = 30;
+export const CROCHET_DEFAULT_HEIGHT = 30;
 
-export const CROCHET_DEFAULT_WIDTH = 10;
-export const CROCHET_DEFAULT_HEIGHT = 10;
+export const UNDO_HISTORY_LIMIT = 30;

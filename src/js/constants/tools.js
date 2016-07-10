@@ -1,13 +1,13 @@
-export const TOOL_DELETE = 'TOOL_DELETE';
+export const TOOL_NONE = 'TOOL_NONE';
 export const TOOL_RECTANGLE_EMPTY = 'TOOL_RECTANGLE_EMPTY';
 export const TOOL_RECTANGLE_ENVELOPE = 'TOOL_RECTANGLE_ENVELOPE';
 export const TOOL_SQUARE_CROSS = 'TOOL_SQUARE_CROSS';
 export const TOOL_SQUARE_EMPTY = 'TOOL_SQUARE_EMPTY';
 
 export const TOOLS = {
-  [TOOL_DELETE]: {
+  [TOOL_NONE]: {
     name: 'Gumka',
-    toolId: TOOL_DELETE,
+    toolId: TOOL_NONE,
     imageUrl: undefined,
     width: 1,
     height: 1

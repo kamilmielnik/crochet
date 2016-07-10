@@ -1,6 +1,7 @@
 import _ from 'underscore';
+import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { TOOLS, TOOL_DELETE } from 'constants';
+import { TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
@@ -9,11 +10,10 @@ import {
 } from 'constants/actionTypes';
 
 const initialState = {
-  canvas: [],
-  patterns: []
+  canvas: []
 };
 
-export default reducer(
+export default undoable(reducer(
   initialState,
   {
     [CROCHET_ADD_COLUMNS]: (state, action) => {
@@ -46,12 +46,10 @@ export default reducer(
     [CROCHET_APPLY_TOOL]: (state, action) => {
       const { rowIndex, columnIndex, toolId } = action;
       const { canvas } = state;
-      const tool = TOOLS[toolId];
-      const currentValue = canvas[rowIndex][columnIndex];
-      const newValue = {
-        ...currentValue,
-        ...tool
-      };
+
+      if (!canApplyTool(canvas, { rowIndex, columnIndex }, toolId)) {
+        return state;
+      }
 
       return {
         ...state,
@@ -59,10 +57,7 @@ export default reducer(
           ...canvas.slice(0, rowIndex),
           [
             ...canvas[rowIndex].slice(0, columnIndex),
-            {
-              ...canvas[rowIndex][columnIndex],
-              ...tool
-            },
+            toolId,
             ...canvas[rowIndex].slice(columnIndex + 1)
           ],
           ...canvas.slice(rowIndex + 1)
@@ -80,7 +75,9 @@ export default reducer(
       };
     }
   }
-);
+), {
+  limit: UNDO_HISTORY_LIMIT
+});
 
 function generateRows(numberOfRows, numberOfColumns) {
   return _.range(0, numberOfRows).map(() => generateRow(numberOfColumns));
@@ -91,5 +88,80 @@ function generateRow(numberOfColumns) {
 }
 
 function generateCell() {
-  return TOOLS[TOOL_DELETE];
+  return TOOL_NONE;
+}
+
+function canApplyTool(canvas, { rowIndex, columnIndex }, toolId) {
+  if (isRemoveTool(toolId)) {
+    return true;
+  }
+
+  if (isOtherToolUsedAlready(canvas, rowIndex, columnIndex)) {
+    return false;
+  }
+
+  const { width, height } = TOOLS[toolId];
+
+  if (width === 2) {
+    return [
+      !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
+      !isRightNeighborBlocking(canvas, rowIndex, columnIndex)
+    ].every(Boolean);
+  }
+
+  if (height === 2) {
+    return [
+      !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
+      !isBottomNeighborBlocking(canvas, rowIndex, columnIndex)
+    ].every(Boolean);
+  }
+
+  return !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex);
+}
+
+function isRemoveTool(toolId) {
+  return toolId === TOOL_NONE;
+}
+
+function isOtherToolUsedAlready(canvas, rowIndex, columnIndex) {
+  return canvas[rowIndex][columnIndex] !== TOOL_NONE;
+}
+
+function areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex) {
+  return [
+    isLeftNeighborBlocking(canvas, rowIndex, columnIndex),
+    isUpperNeighborBlocking(canvas, rowIndex, columnIndex)
+  ].some(Boolean);
+}
+
+function isLeftNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (columnIndex === 0) {
+    return false;
+  }
+
+  return canvas[rowIndex][columnIndex - 1].width === 2;
+}
+
+function isUpperNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (rowIndex === 0) {
+    return false;
+  }
+
+  return canvas[rowIndex - 1][columnIndex].height === 2;
+}
+
+function isRightNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (columnIndex === canvas[0].length - 1) {
+    return true;
+  }
+
+  return canvas[rowIndex][columnIndex + 1] !== TOOL_NONE;
+}
+
+function isBottomNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (rowIndex === canvas.length - 1) {
+    return true;
+  }
+
+  return canvas[rowIndex + 1][columnIndex] !== TOOL_NONE;
 }

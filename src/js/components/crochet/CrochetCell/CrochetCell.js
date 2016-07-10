@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
+import { TOOLS } from 'constants';
 import { PureRender } from 'components/base';
 
 const MOUSE_BUTTON_LEFT = 1;
@@ -8,11 +9,8 @@ const MOUSE_BUTTON_LEFT = 1;
 export default class CrochetCell extends PureRender {
   static propTypes = {
     columnIndex: PropTypes.number.isRequired,
-    height: PropTypes.number,
-    imageUrl: PropTypes.string,
-    pattern: PropTypes.string,
     rowIndex: PropTypes.number.isRequired,
-    width: PropTypes.number,
+    toolId: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
   };
 
@@ -32,11 +30,12 @@ export default class CrochetCell extends PureRender {
   }
 
   render() {
+    const { toolId } = this.props;
     const {
       height,
       imageUrl,
       width
-    } = this.props;
+    } = TOOLS[toolId];
 
     return (
       <div
