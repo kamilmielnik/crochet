@@ -43,6 +43,7 @@ function renderContent() {
     - dodac zarzadzanie projektami
     - pobierz do pliku json
     - zaladuj z pliku json
+    - sekcje w Toolbarze
 
   TODO LOW:
     - numerki wierszy/kolumn
