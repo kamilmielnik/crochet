@@ -3,16 +3,22 @@ import _ from 'underscore';
 import classNames from 'classnames';
 import { bindActionsAndConnect } from 'utils';
 import { TOOLS } from 'constants';
+import { Button } from 'components/ui';
 import './Tools.scss';
 
-const tools = _(TOOLS).map(({ toolId, name }) => ({
+const tools = _(TOOLS).map(({ toolId, name, group }) => ({
   label: name,
-  value: toolId
+  value: toolId,
+  group
 }));
+
+const toolsGroups = _(tools).groupBy('group');
 
 class Tools extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    canRedo: PropTypes.bool.isRequired,
+    canUndo: PropTypes.bool.isRequired,
     tool: PropTypes.object.isRequired
   };
 
@@ -49,6 +55,8 @@ class Tools extends Component {
   render() {
     const {
       actions: { toolChoose },
+      canRedo,
+      canUndo,
       tool: { toolId }
     } = this.props;
 
@@ -58,41 +66,68 @@ class Tools extends Component {
           'tools'
         )}>
         <div className="undo-redo">
-          <div className="undo" onClick={this.onUndo}>
+          <Button
+            className="undo"
+            isDisabled={!canUndo}
+            onClick={this.onUndo}>
             Cofnij
-          </div>
-          <div className="redo" onClick={this.onRedo}>
+          </Button>
+          <Button
+            className="redo"
+            isDisabled={!canRedo}
+            onClick={this.onRedo}>
             Ponów
-          </div>
+          </Button>
         </div>
 
-        {tools.map(({ value, label }) => (
-          <div
-            key={value}
-            className={classNames(
-              'tool',
-              {
-                selected: value === toolId
-              }
-            )}
-            onClick={() => toolChoose(value)}>
-            {label}
-          </div>
-        ))}
+        <div className="patterns">
+          {_(toolsGroups).map((group, groupKey) => (
+            <div key={groupKey} className="patterns-group">
+              {group.map(({ value, label }) => {
+                const { height, imageUrl, iconUrl, width } = TOOLS[value];
+                const urlToShow = imageUrl || iconUrl;
+                return (
+                  <Button
+                    key={value}
+                    className={classNames(
+                      'pattern',
+                      {
+                        active: value === toolId
+                      }
+                    )}
+                    onClick={() => toolChoose(value)}>
+                    {urlToShow && (
+                      <div
+                        className={classNames(
+                          'pattern-image',
+                          `height-${height}`,
+                          `width-${width}`
+                        )}
+                        style={{
+                          backgroundImage: `url(${urlToShow})`
+                        }} />
+                    )}
+                    {!urlToShow && label}
+                  </Button>
+                );
+              })}
+            </div>
+          ))}
+        </div>
 
         <div className="canvas-control">
-          <div onClick={this.onCrochetAddRow}>
+          <Button onClick={this.onCrochetAddRow}>
             Dodaj wiersz
-          </div>
-          <div onClick={this.onCrochetAdd10Rows}>
+          </Button>
+          <Button onClick={this.onCrochetAdd10Rows}>
             Dodaj 10 wierszy
-          </div>
-          <div onClick={this.onCrochetAddColumn}>
+          </Button>
+          <Button onClick={this.onCrochetAddColumn}>
             Dodaj kolumnę
-          </div>
-          <div onClick={this.onCrochetAdd10Columns}>
+          </Button>
+          <Button onClick={this.onCrochetAdd10Columns}>
             Dodaj 10 kolumn
-          </div>
+          </Button>
         </div>
       </div>
     );

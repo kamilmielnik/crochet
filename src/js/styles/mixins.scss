@@ -17,3 +17,8 @@
   min-height: $height;
   max-height: $height;
 }
+
+@mixin const-size($size) {
+  @include const-height($size);
+  @include const-width($size);
+}

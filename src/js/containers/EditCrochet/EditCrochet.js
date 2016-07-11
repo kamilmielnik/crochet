@@ -24,6 +24,8 @@ class EditCrochet extends Component {
   render() {
     const {
       crochet: {
+        future,
+        past,
         present: {
           canvas
         }
@@ -33,7 +35,9 @@ class EditCrochet extends Component {
     return (
       <div className="edit-crochet">
         <div className="tools-container">
-          <Tools />
+          <Tools
+            canUndo={past.length > 0}
+            canRedo={future.length > 0} />
         </div>
 
         <div className="crochet-container">

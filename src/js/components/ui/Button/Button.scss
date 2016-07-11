@@ -2,18 +2,49 @@
 @import '~styles/mixins.scss';
 
 .button {
-  display: inline-block;
-  padding: 0px $spacing-s;
-  text-align: center;
+  display: block;
+  background: $color-secondary;
+  color: $fg-color;
+  padding: $spacing-xs $spacing-l;
+  margin: $spacing-l 0;
+  text-align: left;
   cursor: pointer;
-  font-size: $font-size-l;
+  font-size: $font-size-m;
+  border-radius: $spacing-s;
 
-  :focus {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:focus {
     outline: 0;
+  }
+
+  &:hover {
+    background-color: lighten($color-secondary, 10%);
+  }
+
+  &:active, &.active {
+    background-color: darken($color-secondary, 20%);
   }
 
   &.is-disabled {
     pointer-events: none;
     color: $color-inactive;
+    opacity: 0.2;
+
+  }
+
+  &.inline {
+    display: inline-block;
+    margin: 0 $spacing-l;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }

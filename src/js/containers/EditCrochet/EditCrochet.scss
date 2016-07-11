@@ -2,7 +2,6 @@
 @import '~styles/mixins.scss';
 
 $tools-width: 250px;
-$crochet-size: 12px;
 
 .edit-crochet {
   position: relative;
@@ -32,8 +31,7 @@ $crochet-size: 12px;
         user-select: none;
 
         .cell {
-          @include const-width($crochet-size);
-          @include const-height($crochet-size);
+          @include const-size($crochet-size);
 
           position: relative;
           display: table-cell;

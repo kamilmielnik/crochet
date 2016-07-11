@@ -40,7 +40,6 @@ function renderContent() {
 
 /*
   TODO
-    - ostylowac menu
     - dodac persystencje
     - poprawic wyglad obrazkow
     - dodac nowe narzedzia (obrocone)
@@ -48,4 +47,5 @@ function renderContent() {
     - dodac zarzadzanie projektami
     - rozne rozmiary siatki
     - mirroring siatki
+    - numerki wierszy/kolumn
 */

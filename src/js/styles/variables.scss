@@ -15,16 +15,19 @@ $spacing-xl:                30px;
 $spacing-xxl:               40px;
 $spacing-xxxl:              60px;
 
-$color-primary:             #ff3356;
-$color-primary-light:       #ffc7d1;
-$color-secondary:           #00a4e2;
-$color-secondary-light:     #b5ebff;
-$color-inactive:            #bbccd2;
+$color-primary:             #193441;
+$color-primary-light:       #3E606F;
+$color-secondary:           #91AA9D;
+$color-secondary-light:     #D1DBBD;
+$color-inactive:            gray;
+$color-border:              #bbccd2;
 
-$fg-color:                  $color-primary;
+$fg-color:                  #FCFFF5;
 $fg-gray:                   gray;
 $bg-color:                  $color-primary-light;
 
-$border-solid:              1px solid $color-inactive;
-$border-dotted:             1px dotted $color-inactive;
+$border-solid:              1px solid $color-border;
+$border-dotted:             1px dotted $color-border;
 $border-transparent:        1px solid transparent;
+
+$crochet-size:              12px;

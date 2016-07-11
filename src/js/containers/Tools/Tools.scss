@@ -1,20 +1,51 @@
 @import '~styles/variables.scss';
 @import '~styles/mixins.scss';
 
+$pattern-size: 24px;
+
 .tools {
   .undo-redo {
     margin-bottom: $spacing-xl;
   }
 
-  .tool {
-    cursor: pointer;
+  .patterns {
+    .patterns-group {
+      display: flex;
 
-    &:hover {
-      text-decoration: underline;
-    }
+      .pattern {
+        @include const-size(2 * $pattern-size + 2 * $spacing-xs);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: $spacing-xs;
+        margin: $spacing-s $spacing-xs;
 
-    &.selected {
-      font-weight: bold;
+        &.active {
+          font-weight: bold;
+        }
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .pattern-image {
+          width: $pattern-size;
+          height: $pattern-size;
+          background-size: contain;
+
+          &.width-2 {
+            width: 2 * $pattern-size;
+          }
+
+          &.height-2 {
+            height: 2 * $pattern-size;
+          }
+        }
+      }
     }
   }
 
