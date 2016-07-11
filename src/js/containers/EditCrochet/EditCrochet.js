@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
 import Tools from '../Tools/Tools';
-import { CrochetRow } from 'components/crochet';
+import { Crochet } from 'components/crochet';
 import './EditCrochet.scss';
 
 class EditCrochet extends Component {
@@ -42,14 +42,9 @@ class EditCrochet extends Component {
 
         <div className="crochet-container">
           <div className="crochet">
-            {canvas.map((row, rowIndex) => (
-              <CrochetRow
-                key={rowIndex}
-                className="row"
-                row={row}
-                rowIndex={rowIndex}
-                onCellClick={this.onCellClick} />
-            ))}
+            <Crochet
+              canvas={canvas}
+              onCellClick={this.onCellClick} />
           </div>
         </div>
       </div>
