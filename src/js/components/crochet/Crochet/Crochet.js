@@ -10,10 +10,10 @@ export default class Crochet extends PureRender {
   };
 
   render() {
-    const { canvas, onCellClick } = this.props;
+    const { canvas, onCellClick, ...restProps } = this.props;
 
     return (
-      <div className="crochet">
+      <div className="crochet" {...restProps}>
         {canvas.map((row, rowIndex) => (
           <CrochetRow
             key={rowIndex}

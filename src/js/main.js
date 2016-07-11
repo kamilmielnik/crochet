@@ -39,11 +39,12 @@ function renderContent() {
 }
 
 /*
-  TODO
+  TODO HIGH:
     - dodac persystencje
-    - ogarnac drukowanie
     - dodac zarzadzanie projektami
     - rozne rozmiary siatki
+
+  TODO LOW:
     - numerki wierszy/kolumn
     - podswietl puste pola
 */

@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
-import { bindActionsAndConnect } from 'utils';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'filesaver.js';
+import { bindActionsAndConnect, fileNameNow } from 'utils';
 import { TOOLS } from 'constants';
 import { Button } from 'components/ui';
 import './Tools.scss';
@@ -40,6 +42,18 @@ class Tools extends Component {
   onCrochetAddColumn = () => {
     const { actions: { crochetAddColumns } } = this.props;
     crochetAddColumns(1);
+  };
+
+  onDownload = () => {
+    const crochetElement = document.getElementById('crochet');
+
+    html2canvas(crochetElement, {
+      onrendered: canvas => {
+        canvas.toBlob(blob => {
+          saveAs(blob, fileNameNow('plik', 'png'));
+        });
+      }
+    });
   };
 
   onMirrorHorizontal = () => {
@@ -143,6 +157,9 @@ class Tools extends Component {
           </Button>
           <Button onClick={this.onMirrorHorizontal}>
             Odb. lustrz. poziom
+          </Button>
+          <Button onClick={this.onDownload}>
+            Pobierz do druku
           </Button>
         </div>
       </div>

@@ -43,6 +43,7 @@ class EditCrochet extends Component {
         <div className="crochet-container">
           <div className="crochet">
             <Crochet
+              id="crochet"
               canvas={canvas}
               onCellClick={this.onCellClick} />
           </div>
