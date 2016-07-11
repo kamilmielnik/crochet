@@ -23,6 +23,7 @@ export const TOOLS = {
     iconUrl: 'images/tools/tool_eraser.png',
     width: 1,
     height: 1,
+    order: 1,
     group: TOOL_GROUP_1
   },
 
@@ -31,6 +32,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_square_empty.svg',
     width: 1,
     height: 1,
+    order: 1,
     group: TOOL_GROUP_2
   },
 
@@ -39,6 +41,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_square_cross.svg',
     width: 1,
     height: 1,
+    order: 2,
     group: TOOL_GROUP_2
   },
 
@@ -47,6 +50,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_square_dot.svg',
     width: 1,
     height: 1,
+    order: 3,
     group: TOOL_GROUP_2
   },
 
@@ -55,6 +59,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_dot.svg',
     width: 1,
     height: 1,
+    order: 4,
     group: TOOL_GROUP_2
   },
 
@@ -63,6 +68,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_empty.svg',
     width: 2,
     height: 1,
+    order: 1,
     group: TOOL_GROUP_3
   },
 
@@ -71,6 +77,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_empty-vertical.svg',
     width: 1,
     height: 2,
+    order: 2,
     group: TOOL_GROUP_3
   },
 
@@ -79,6 +86,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope.svg',
     width: 2,
     height: 1,
+    order: 1,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE_180,
     group: TOOL_GROUP_4
   },
@@ -88,6 +96,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_180.svg',
     width: 2,
     height: 1,
+    order: 2,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE,
     group: TOOL_GROUP_4
   },
@@ -97,6 +106,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_270.svg',
     width: 1,
     height: 2,
+    order: 3,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_90,
     group: TOOL_GROUP_4
   },
@@ -106,6 +116,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_90.svg',
     width: 1,
     height: 2,
+    order: 4,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_270,
     group: TOOL_GROUP_4
   }

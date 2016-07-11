@@ -8,7 +8,8 @@ import { TOOLS } from 'constants';
 import { Button } from 'components/ui';
 import './Tools.scss';
 
-const tools = _(TOOLS).map(({ toolId, name, group }) => ({
+const sortedTools = _(TOOLS).sortBy('order');
+const tools = sortedTools.map(({ toolId, name, group }) => ({
   label: name,
   value: toolId,
   group
