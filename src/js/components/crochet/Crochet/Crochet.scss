@@ -56,3 +56,13 @@
     }
   }
 }
+
+@media print {
+  .crochet {
+    border: 1px solid black;
+  }
+
+  .cell {
+    border: 0 !important;
+  }
+}

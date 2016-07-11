@@ -24,3 +24,9 @@ $tools-width: 282px;
     overflow: auto;
   }
 }
+
+@media print {
+  .tools-container {
+    display: none;
+  }
+}
