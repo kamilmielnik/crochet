@@ -1,0 +1,45 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.info {
+  padding: 0 $spacing-xxxl;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding-top: 100px;
+  text-align: center;
+  color: $color-primary;
+
+  ul {
+    font-size: $font-size-s;
+    text-align: left;
+
+    li {
+      margin: $spacing-xs 0;
+    }
+  }
+
+  .cheers {
+    padding-top: $spacing-l;
+    text-align: right;
+  }
+
+  .author {
+    padding-top: $spacing-s;
+    font-size: $font-size-xs;
+    text-align: right;
+  }
+
+  .button-container {
+    padding-top: $spacing-l;
+    max-width: 400px;
+    margin: 0 auto;
+
+    a {
+      text-decoration: none;
+    }
+
+    .button {
+      text-align: center;
+    }
+  }
+}
