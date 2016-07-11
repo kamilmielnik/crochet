@@ -17,8 +17,16 @@ class EditCrochet extends Component {
   }
 
   onCellClick = (rowIndex, columnIndex) => {
-    const { actions: { crochetApplyTool }, tool: { toolId } } = this.props;
-    crochetApplyTool(rowIndex, columnIndex, toolId);
+    const {
+      actions: { crochetApplyTool },
+      crochet: { present: { canvas } },
+      tool: { toolId }
+    } = this.props;
+
+    const currentToolId = canvas[rowIndex][columnIndex];
+    if (currentToolId !== toolId) {
+      crochetApplyTool(rowIndex, columnIndex, toolId);
+    }
   }
 
   render() {
