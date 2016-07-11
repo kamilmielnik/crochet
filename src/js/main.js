@@ -40,9 +40,10 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - dodac persystencje
     - dodac zarzadzanie projektami
     - rozne rozmiary siatki
+    - pobierz do pliku json
+    - zaladuj z pliku json
 
   TODO LOW:
     - numerki wierszy/kolumn

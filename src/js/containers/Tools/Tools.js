@@ -44,7 +44,7 @@ class Tools extends Component {
     crochetAddColumns(1);
   };
 
-  onDownload = () => {
+  onDownloadImage = () => {
     const crochetElement = document.getElementById('crochet');
 
     html2canvas(crochetElement, {
@@ -158,7 +158,7 @@ class Tools extends Component {
           <Button onClick={this.onMirrorHorizontal}>
             Odb. lustrz. poziom
           </Button>
-          <Button onClick={this.onDownload}>
+          <Button onClick={this.onDownloadImage}>
             Pobierz do druku
           </Button>
         </div>

@@ -10,7 +10,7 @@ export default class CrochetCell extends PureRender {
   static propTypes = {
     columnIndex: PropTypes.number.isRequired,
     rowIndex: PropTypes.number.isRequired,
-    toolId: PropTypes.string.isRequired,
+    toolId: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired
   };
 

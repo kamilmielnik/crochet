@@ -1,10 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import rootReducer from 'reducers';
 import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
 
 export default function configureStore(initialState, history) {
   const store = createStore(rootReducer, initialState, createEnhancer(history));
+  persistStore(store);
   enableWebpackHMRForReducers(store);
   return store;
 }
@@ -25,7 +27,10 @@ function createProductionMiddleware(history) {
 }
 
 function createProductionEnhancer(middleware) {
-  return compose(middleware);
+  return compose(
+    autoRehydrate(),
+    middleware
+  );
 }
 
 function createDevelopmentMiddleware(history) {
@@ -46,6 +51,7 @@ function createDevelopmentEnhancer(middleware) {
   const devToolsExtension = window.devToolsExtension;
 
   return compose(
+    autoRehydrate(),
     middleware,
     devToolsExtension ? devToolsExtension() : require('../containers/DevTools').default.instrument(),
 

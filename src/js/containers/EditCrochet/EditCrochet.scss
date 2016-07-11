@@ -7,21 +7,21 @@ $tools-width: 282px;
   position: relative;
   user-select: none;
 
-  .tools-container {
+  .tools-container, .crochet-container {
     position: absolute;
     top: 0;
     bottom: 0;
+    overflow: auto;
+  }
+
+  .tools-container {
     left: 0;
     padding: $spacing-m $spacing-l;
   }
 
   .crochet-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
     left: $tools-width + $spacing-l;
     right: 0;
-    overflow: auto;
   }
 }
 
