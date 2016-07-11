@@ -28,7 +28,8 @@ class Info extends Component {
               <strong>kliknij</strong> myszką na komórkę kanwy aby umieścić wybrany wzór
             </li>
             <li>
-              <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby ciągle umieszczać wybrany wzór
+              <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby ciągle&nbsp;
+              umieszczać wybrany wzór
             </li>
             <li>
               wszystkie Twoje zmiany są zapisywane <strong>automatycznie</strong> i <strong>natychmiast</strong>
@@ -44,8 +45,12 @@ class Info extends Component {
               <strong>Odbicie lustrzane pion</strong> i <strong>Odbicie lustrzane poziom</strong>
             </li>
             <li>
-              możesz powiększyć kanwę swojego projektu korzystając z narzędzi&nbsp;
+              możesz powiększyć obszar kanwy swojego projektu korzystając z narzędzi&nbsp;
               <strong>Dodaj wiersz</strong> i <strong>Dodaj kolumnę</strong>
+            </li>
+            <li>
+              możesz dowolnie zmieniać rozmiar komórek kanwy swojego projektu korzystając z narzędzia&nbsp;
+              <strong>Rozmiar komórki</strong> (zmiana wpłynie również na <strong>wygląd wydruku</strong>)
             </li>
             <li>
               Twoje projekty są przechowywane na <strong>Twoim komputerze</strong>,&nbsp;

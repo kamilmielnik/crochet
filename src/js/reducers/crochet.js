@@ -1,18 +1,20 @@
 import _ from 'underscore';
 import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
+import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
+  CROCHET_CELL_SIZE_CHANGE,
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW
 } from 'constants/actionTypes';
 
 const initialState = {
-  canvas: []
+  canvas: [],
+  cellSize: CROCHET_SIZE_DEFAULT
 };
 
 export default undoable(reducer(
@@ -64,6 +66,15 @@ export default undoable(reducer(
           ],
           ...canvas.slice(rowIndex + 1)
         ]
+      };
+    },
+
+    [CROCHET_CELL_SIZE_CHANGE]: (state, action) => {
+      const { cellSize } = action;
+
+      return {
+        ...state,
+        cellSize
       };
     },
 

@@ -9,7 +9,7 @@
     user-select: none;
 
     .cell {
-      @include const-size($crochet-size);
+      @include sizes($min-crochet-size, $max-crochet-size);
 
       position: relative;
       display: table-cell;
@@ -27,21 +27,12 @@
       }
 
       .pattern {
+        @include sizes($min-crochet-size, $max-crochet-size);
         z-index: 1;
         position: absolute;
         top: 0;
         left: -1px;
-        width: $crochet-size;
-        height: $crochet-size;
         background-size: contain;
-
-        &.width-2 {
-          width: 2 * $crochet-size;
-        }
-
-        &.height-2 {
-          height: 2 * $crochet-size;
-        }
       }
     }
 

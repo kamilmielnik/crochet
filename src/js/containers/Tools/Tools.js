@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
-import { TOOLS } from 'constants';
-import { Button } from 'components/ui';
+import { CROTCHET_SIZE_OPTIONS, TOOLS } from 'constants';
+import { Button, NumberPicker } from 'components/ui';
 import './Tools.scss';
 
 const sortedTools = _(TOOLS).sortBy('order');
@@ -22,7 +22,13 @@ class Tools extends Component {
     actions: PropTypes.object.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
+    cellSize: PropTypes.number.isRequired,
     tool: PropTypes.object.isRequired
+  };
+
+  onCellSizeChange = cellSize => {
+    const { actions: { crochetCellSizeChange } } = this.props;
+    crochetCellSizeChange(cellSize);
   };
 
   onCrochetAdd10Rows = () => {
@@ -82,6 +88,7 @@ class Tools extends Component {
       actions: { toolChoose },
       canRedo,
       canUndo,
+      cellSize,
       tool: { toolId }
     } = this.props;
 
@@ -162,6 +169,12 @@ class Tools extends Component {
           <Button onClick={this.onDownloadImage}>
             Pobierz do druku
           </Button>
+          <div>
+            <NumberPicker
+              value={cellSize}
+              values={CROTCHET_SIZE_OPTIONS}
+              onChange={this.onCellSizeChange} />
+          </div>
         </div>
       </div>
     );
@@ -170,4 +183,5 @@ class Tools extends Component {
 
 export default bindActionsAndConnect(Tools, state => ({
   tool: state.tool
+
 }));

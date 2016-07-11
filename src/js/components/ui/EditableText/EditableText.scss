@@ -1,0 +1,28 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.editable-text-input {
+  display: block;
+  width: 100%;
+  line-height: 42px;
+  height: 42px;
+  background-color: $fg-color;
+  padding: $spacing-xs $spacing-s;
+  border: 0;
+  border-radius: 0;
+  border-image: 0;
+  font-size: $font-size-m;
+  color: $color-primary;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.editable-text {
+  display: block;
+  padding: 0;
+}

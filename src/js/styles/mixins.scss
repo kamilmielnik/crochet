@@ -22,3 +22,19 @@
   @include const-height($size);
   @include const-width($size);
 }
+
+@mixin sizes($min-size, $max-size) {
+  @for $size from $min-size through $max-size {
+    &.size-#{$size} {
+      @include const-size($size * 1px);
+
+      &.width-2 {
+        @include const-width(2 * $size * 1px);
+      }
+
+      &.height-2 {
+        @include const-width(2 * $size * 1px);
+      }
+    }
+  }
+}

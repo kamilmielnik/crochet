@@ -8,6 +8,7 @@ const MOUSE_BUTTON_LEFT = 1;
 
 export default class CrochetCell extends PureRender {
   static propTypes = {
+    cellSize: PropTypes.number.isRequired,
     columnIndex: PropTypes.number.isRequired,
     rowIndex: PropTypes.number.isRequired,
     toolId: PropTypes.number.isRequired,
@@ -30,16 +31,16 @@ export default class CrochetCell extends PureRender {
   }
 
   render() {
-    const { toolId } = this.props;
-    const {
-      height,
-      imageUrl,
-      width
-    } = TOOLS[toolId];
+    const { cellSize, toolId } = this.props;
+    const { height, imageUrl, width } = TOOLS[toolId];
+    const sizeClass = `size-${cellSize}`;
 
     return (
       <div
-        className="cell"
+        className={classNames(
+          'cell',
+          sizeClass
+        )}
         onMouseDown={this.onActivated}
         onMouseEnter={this.onMouseEnter}>
         {imageUrl && (
@@ -47,7 +48,8 @@ export default class CrochetCell extends PureRender {
             className={classNames(
               'pattern',
               `height-${height}`,
-              `width-${width}`
+              `width-${width}`,
+              sizeClass
             )}
             style={{
               backgroundImage: `url(${imageUrl})`

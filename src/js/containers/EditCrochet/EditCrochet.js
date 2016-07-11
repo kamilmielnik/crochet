@@ -35,7 +35,8 @@ class EditCrochet extends Component {
         future,
         past,
         present: {
-          canvas
+          canvas,
+          cellSize
         }
       }
     } = this.props;
@@ -45,7 +46,8 @@ class EditCrochet extends Component {
         <div className="tools-container">
           <Tools
             canUndo={past.length > 0}
-            canRedo={future.length > 0} />
+            canRedo={future.length > 0}
+            cellSize={cellSize} />
         </div>
 
         <div className="crochet-container">
@@ -53,6 +55,7 @@ class EditCrochet extends Component {
             <Crochet
               id="crochet"
               canvas={canvas}
+              cellSize={cellSize}
               onCellClick={this.onCellClick} />
           </div>
         </div>

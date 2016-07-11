@@ -6,11 +6,17 @@ import './Crochet.scss';
 export default class Crochet extends PureRender {
   static propTypes = {
     canvas: PropTypes.array.isRequired,
+    cellSize: PropTypes.number.isRequired,
     onCellClick: PropTypes.func.isRequired
   };
 
   render() {
-    const { canvas, onCellClick, ...restProps } = this.props;
+    const {
+      canvas,
+      cellSize,
+      onCellClick,
+      ...restProps
+    } = this.props;
 
     return (
       <div className="crochet" {...restProps}>
@@ -18,6 +24,7 @@ export default class Crochet extends PureRender {
           <CrochetRow
             key={rowIndex}
             className="row"
+            cellSize={cellSize}
             row={row}
             rowIndex={rowIndex}
             onCellClick={onCellClick} />

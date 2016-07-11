@@ -1,0 +1,35 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.number-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .subtract, .add {
+    display: inline-block;
+    margin: 0 $spacing-l;
+    border-radius: 0;
+    font-weight: bold;
+    width: 56px;
+    text-align: center;
+  }
+
+  .value {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+  }
+
+  &.vertical {
+    flex-direction: column-reverse;
+
+    .subtract {
+      margin: $spacing-xs 0;
+    }
+
+    .add {
+      margin: $spacing-xs 0;
+    }
+  }
+}

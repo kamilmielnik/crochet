@@ -4,13 +4,19 @@ import CrochetCell from '../CrochetCell/CrochetCell';
 
 export default class CrochetRow extends PureRender {
   static propTypes = {
+    cellSize: PropTypes.number.isRequired,
     row: PropTypes.array.isRequired,
     rowIndex: PropTypes.number.isRequired,
     onCellClick: PropTypes.func.isRequired
   };
 
   render() {
-    const { row, rowIndex, onCellClick } = this.props;
+    const {
+      cellSize,
+      row,
+      rowIndex,
+      onCellClick
+    } = this.props;
 
     return (
       <div className="row">
@@ -18,6 +24,7 @@ export default class CrochetRow extends PureRender {
           <CrochetCell
             key={columnIndex}
             columnIndex={columnIndex}
+            cellSize={cellSize}
             rowIndex={rowIndex}
             toolId={cell}
             onClick={onCellClick} />
