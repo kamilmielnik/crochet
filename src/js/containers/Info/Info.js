@@ -32,7 +32,7 @@ class Info extends Component {
               umieszczać wybrany wzór
             </li>
             <li>
-              wszystkie Twoje zmiany są zapisywane <strong>automatycznie</strong> i <strong>natychmiast</strong>
+              wszystkie Twoje zmiany są zapisywane <strong>automatycznie</strong>, co <strong>5 sekund</strong>
             </li>
             <li>
               w razie pomyłki możesz skorzystać z narzędzi <strong>Gumka</strong> i <strong>Cofnij</strong>
@@ -66,7 +66,8 @@ class Info extends Component {
             </li>
             <li className="danger">
               <strong>uwaga</strong>: szybkość działania aplikacji jest&nbsp;
-              odwrotnie proporcjonalna do rozmiaru kanwy Twojego projektu
+              odwrotnie proporcjonalna do rozmiaru kanwy Twojego projektu&nbsp;
+              (<strong>dobra rada</strong>: ogranicz swoje projekty do 5-6 tysięcy komórek)
             </li>
             <li className="danger">
               <strong>uwaga</strong>: czyszczenie historii przeglądarki internetowej, tryb prywatny,&nbsp;

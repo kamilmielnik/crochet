@@ -33,7 +33,7 @@
       }
 
       &.height-2 {
-        @include const-width(2 * $size * 1px);
+        @include const-height(2 * $size * 1px);
       }
     }
   }

@@ -1,12 +1,15 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import rootReducer from 'reducers';
 import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
+import { PERSISTENCE_DEBOUNCE } from 'constants';
+import rootReducer from 'reducers';
 
 export default function configureStore(initialState, history) {
   const store = createStore(rootReducer, initialState, createEnhancer(history));
-  persistStore(store);
+  persistStore(store, {
+    debounce: PERSISTENCE_DEBOUNCE
+  });
   enableWebpackHMRForReducers(store);
   return store;
 }
