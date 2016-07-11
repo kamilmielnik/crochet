@@ -106,7 +106,7 @@ export default undoable(reducer(
             row[columnIndex] = mirroredCanvas[rowIndex - 1][columnIndex];
             mirroredCanvas[rowIndex - 1][columnIndex] = toolId;
           }
-        })
+        });
       });
 
       return {
@@ -155,14 +155,16 @@ function canApplyTool(canvas, { rowIndex, columnIndex }, toolId) {
   if (width === 2) {
     return [
       !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
-      !isRightNeighborBlocking(canvas, rowIndex, columnIndex)
+      !isRightNeighborBlocking(canvas, rowIndex, columnIndex),
+      !isTopRightNeighborBlocking(canvas, rowIndex, columnIndex)
     ].every(Boolean);
   }
 
   if (height === 2) {
     return [
       !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
-      !isBottomNeighborBlocking(canvas, rowIndex, columnIndex)
+      !isBottomNeighborBlocking(canvas, rowIndex, columnIndex),
+      !isBottomLeftNeighborBlocking(canvas, rowIndex, columnIndex)
     ].every(Boolean);
   }
 
@@ -214,10 +216,38 @@ function isRightNeighborBlocking(canvas, rowIndex, columnIndex) {
   return canvas[rowIndex][columnIndex + 1] !== TOOL_NONE;
 }
 
+function isTopRightNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (rowIndex === 0) {
+    return false;
+  }
+
+  if (columnIndex === canvas[0].length - 1) {
+    return false;
+  }
+
+  const topRightToolId = canvas[rowIndex - 1][columnIndex + 1];
+  const { height: topRightToolHeight } = TOOLS[topRightToolId];
+  return topRightToolHeight === 2;
+}
+
 function isBottomNeighborBlocking(canvas, rowIndex, columnIndex) {
   if (rowIndex === canvas.length - 1) {
     return true;
   }
 
   return canvas[rowIndex + 1][columnIndex] !== TOOL_NONE;
+}
+
+function isBottomLeftNeighborBlocking(canvas, rowIndex, columnIndex) {
+  if (rowIndex === canvas.length - 1) {
+    return false;
+  }
+
+  if (columnIndex === 0) {
+    return false;
+  }
+
+  const bottomLeftToolId = canvas[rowIndex + 1][columnIndex - 1];
+  const { width: bottomLeftToolWidth } = TOOLS[bottomLeftToolId];
+  return bottomLeftToolWidth === 2;
 }

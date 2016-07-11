@@ -40,7 +40,6 @@ function renderContent() {
 
 /*
   TODO
-    - poprawic kolizje 2*width z 2*height
     - dodac persystencje
     - ogarnac drukowanie
     - dodac zarzadzanie projektami
