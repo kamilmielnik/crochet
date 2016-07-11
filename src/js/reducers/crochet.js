@@ -6,6 +6,8 @@ import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
+  CROCHET_MIRROR_HORIZONTAL,
+  CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW
 } from 'constants/actionTypes';
 
@@ -62,6 +64,26 @@ export default undoable(reducer(
           ],
           ...canvas.slice(rowIndex + 1)
         ]
+      };
+    },
+
+    [CROCHET_MIRROR_HORIZONTAL]: state => {
+      const { canvas } = state;
+      const mirroredCanvas = canvas.map(row => [...row].reverse());
+
+      return {
+        ...state,
+        canvas: mirroredCanvas
+      };
+    },
+
+    [CROCHET_MIRROR_VERTICAL]: state => {
+      const { canvas } = state;
+      const mirroredCanvas = [...canvas].reverse();
+
+      return {
+        ...state,
+        canvas: mirroredCanvas
       };
     },
 

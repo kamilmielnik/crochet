@@ -4,6 +4,8 @@ import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
+  CROCHET_MIRROR_HORIZONTAL,
+  CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW,
   TOOL_CHOOSE
 } from 'constants/actionTypes';
@@ -32,6 +34,18 @@ export function crochetApplyTool(rowIndex, columnIndex, toolId) {
     rowIndex,
     columnIndex,
     toolId
+  };
+}
+
+export function crochetMirrorHorizontal() {
+  return {
+    type: CROCHET_MIRROR_HORIZONTAL
+  };
+}
+
+export function crochetMirrorVertical() {
+  return {
+    type: CROCHET_MIRROR_VERTICAL
   };
 }
 

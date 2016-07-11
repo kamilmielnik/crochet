@@ -42,6 +42,16 @@ class Tools extends Component {
     crochetAddColumns(1);
   };
 
+  onMirrorHorizontal = () => {
+    const { actions: { crochetMirrorHorizontal } } = this.props;
+    crochetMirrorHorizontal();
+  };
+
+  onMirrorVertical = () => {
+    const { actions: { crochetMirrorVertical } } = this.props;
+    crochetMirrorVertical();
+  };
+
   onRedo = () => {
     const { actions: { redo } } = this.props;
     redo();
@@ -127,6 +137,12 @@ class Tools extends Component {
           </Button>
           <Button onClick={this.onCrochetAdd10Columns}>
             Dodaj 10 kolumn
+          </Button>
+          <Button onClick={this.onMirrorVertical}>
+            Odb. lustrz. pion
+          </Button>
+          <Button onClick={this.onMirrorHorizontal}>
+            Odb. lustrz. poziom
           </Button>
         </div>
       </div>
