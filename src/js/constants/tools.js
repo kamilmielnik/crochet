@@ -79,6 +79,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope.svg',
     width: 2,
     height: 1,
+    mirrorVertical: TOOL_RECTANGLE_ENVELOPE_180,
     group: TOOL_GROUP_4
   },
 
@@ -87,6 +88,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_180.svg',
     width: 2,
     height: 1,
+    mirrorVertical: TOOL_RECTANGLE_ENVELOPE,
     group: TOOL_GROUP_4
   },
 
@@ -95,6 +97,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_270.svg',
     width: 1,
     height: 2,
+    mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_90,
     group: TOOL_GROUP_4
   },
 
@@ -103,6 +106,7 @@ export const TOOLS = {
     imageUrl: 'images/tools/tool_rectangle_envelope_90.svg',
     width: 1,
     height: 2,
+    mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_270,
     group: TOOL_GROUP_4
   }
 };

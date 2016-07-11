@@ -70,16 +70,44 @@ export default undoable(reducer(
     [CROCHET_MIRROR_HORIZONTAL]: state => {
       const { canvas } = state;
       const mirroredCanvas = canvas.map(row => [...row].reverse());
+      const shiftedCanvas = mirroredCanvas.map(row => {
+        const shiftedRow = [...row];
+        row.forEach((toolId, columnIndex) => {
+          const { width, mirrorHorizontal } = TOOLS[toolId];
+          if (mirrorHorizontal) {
+            shiftedRow[columnIndex] = mirrorHorizontal;
+          }
+
+          if (width === 2) {
+            shiftedRow[columnIndex] = row[columnIndex - 1];
+            shiftedRow[columnIndex - 1] = toolId;
+          }
+        });
+        return shiftedRow;
+      });
 
       return {
         ...state,
-        canvas: mirroredCanvas
+        canvas: shiftedCanvas
       };
     },
 
     [CROCHET_MIRROR_VERTICAL]: state => {
       const { canvas } = state;
-      const mirroredCanvas = [...canvas].reverse();
+      const mirroredCanvas = [...canvas].reverse().map(row => [...row]);
+      mirroredCanvas.forEach((row, rowIndex) => {
+        row.forEach((toolId, columnIndex) => {
+          const { height, mirrorVertical } = TOOLS[toolId];
+          if (mirrorVertical) {
+            row[columnIndex] = mirrorVertical;
+          }
+
+          if (height === 2) {
+            row[columnIndex] = mirroredCanvas[rowIndex - 1][columnIndex];
+            mirroredCanvas[rowIndex - 1][columnIndex] = toolId;
+          }
+        })
+      });
 
       return {
         ...state,
