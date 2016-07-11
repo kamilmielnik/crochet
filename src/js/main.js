@@ -41,8 +41,6 @@ function renderContent() {
 /*
   TODO
     - dodac persystencje
-    - poprawic wyglad obrazkow
-    - dodac nowe narzedzia (obrocone)
     - ogarnac drukowanie
     - dodac zarzadzanie projektami
     - rozne rozmiary siatki
