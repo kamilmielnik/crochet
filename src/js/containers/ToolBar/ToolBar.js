@@ -1,25 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import html2canvas from 'html2canvas';
-import { saveAs } from 'filesaver.js';
-import { bindActionsAndConnect, fileNameNow } from 'utils';
-import { CROTCHET_SIZE_OPTIONS } from 'constants';
-import { Button, NumberPicker } from 'components/ui';
+import { bindActionsAndConnect } from 'utils';
 import { CanvasControls, ToolsControls, UndoRedoControls } from 'components/crochet';
 import './ToolBar.scss';
-
 
 class ToolBar extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
-    cellSize: PropTypes.number.isRequired,
     tool: PropTypes.object.isRequired
-  };
-
-  onCellSizeChange = cellSize => {
-    const { actions: { crochetCellSizeChange } } = this.props;
-    crochetCellSizeChange(cellSize);
   };
 
   onAdd10Rows = () => {
@@ -42,21 +31,6 @@ class ToolBar extends Component {
     crochetAddColumns(1);
   };
 
-  onDownloadImage = () => {
-    const crochetElement = document.getElementById('crochet');
-
-    this.enableCrochetScrolling();
-    html2canvas(crochetElement, {
-      onrendered: canvas => {
-        canvas.toBlob(blob => {
-          saveAs(blob, fileNameNow('plik', 'png'));
-        });
-      }
-    }).then(() => {
-      this.disableCrochetScrolling();
-    });
-  };
-
   onMirrorHorizontal = () => {
     const { actions: { crochetMirrorHorizontal } } = this.props;
     crochetMirrorHorizontal();
@@ -77,20 +51,11 @@ class ToolBar extends Component {
     undo();
   };
 
-  disableCrochetScrolling = () => {
-    const crochetContainerElement = document.get('crochet-container');
-  };
-
-  enableCrochetScrolling = () => {
-    const crochetContainerElement = document.get('crochet-container');
-  };
-
   render() {
     const {
       actions: { toolChoose },
       canRedo,
       canUndo,
-      cellSize,
       tool: { toolId }
     } = this.props;
 
@@ -113,15 +78,6 @@ class ToolBar extends Component {
           onAddRow={this.onAddRow}
           onMirrorHorizontal={this.onMirrorHorizontal}
           onMirrorVertical={this.onMirrorVertical} />
-
-        <Button onClick={this.onDownloadImage}>
-          Pobierz do druku
-        </Button>
-
-        <NumberPicker
-          value={cellSize}
-          values={CROTCHET_SIZE_OPTIONS}
-          onChange={this.onCellSizeChange} />
       </div>
     );
   }

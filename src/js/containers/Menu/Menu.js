@@ -6,7 +6,7 @@ class Menu extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
-    menu: PropTypes.node,
+    controls: PropTypes.node,
     title: PropTypes.string.isRequired
   };
 
@@ -16,7 +16,7 @@ class Menu extends Component {
   };
 
   render() {
-    const { children, menu, title } = this.props;
+    const { children, controls, title } = this.props;
 
     return (
       <div className="menu-container">
@@ -29,8 +29,8 @@ class Menu extends Component {
             {title}
           </div>
 
-          <div className="buttons">
-            {menu}
+          <div className="controls">
+            {controls}
           </div>
         </div>
 

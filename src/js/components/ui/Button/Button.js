@@ -8,11 +8,13 @@ export default class Button extends Component {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
+    type: PropTypes.oneOf(['primary', 'secondary']),
     onClick: PropTypes.func
   };
 
   static defaultProps = {
     isDisabled: false,
+    type: 'primary',
     onClick: _.noop
   };
 
@@ -25,7 +27,8 @@ export default class Button extends Component {
     const {
       children,
       className,
-      isDisabled
+      isDisabled,
+      type
     } = this.props;
 
     return (
@@ -34,6 +37,7 @@ export default class Button extends Component {
         className={classNames(
           'button',
           'ellipsis',
+          type,
           {
             'is-disabled': isDisabled
           },

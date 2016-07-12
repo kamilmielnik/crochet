@@ -8,7 +8,7 @@
   .menu {
     flex: 1 0 auto;
     display: flex;
-    align-content: center;
+    align-items: center;
     padding: $spacing-s $spacing-l;
     background-color: $color-primary-light;
     color: $fg-color;
@@ -38,8 +38,22 @@
       }
     }
 
-    .buttons {
+    .controls {
       margin-left: auto;
+
+      > div {
+        display: flex;
+
+        > .button {
+          margin-top: 0;
+          margin-bottom: 0;
+          text-align: center;
+        }
+
+        > div {
+          margin-left: $spacing-l;
+        }
+      }
     }
   }
 

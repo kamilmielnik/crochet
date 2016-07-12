@@ -9,6 +9,7 @@ export default class NumberPicker extends Component {
     className: PropTypes.string,
     formatter: PropTypes.func,
     orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+    type: PropTypes.oneOf(['primary', 'secondary']),
     value: PropTypes.number.isRequired,
     values: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired
@@ -44,6 +45,7 @@ export default class NumberPicker extends Component {
       className,
       formatter,
       orientation,
+      type,
       value,
       values
     } = this.props;
@@ -62,6 +64,7 @@ export default class NumberPicker extends Component {
         <Button
           className="subtract"
           isDisabled={!canSubtract}
+          type={type}
           onClick={this.onSubtract}>
           -
         </Button>
@@ -75,6 +78,7 @@ export default class NumberPicker extends Component {
         <Button
           className="add"
           isDisabled={!canAdd}
+          type={type}
           onClick={this.onAdd}>
           +
         </Button>

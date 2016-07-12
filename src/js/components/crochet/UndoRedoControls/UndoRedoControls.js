@@ -24,6 +24,7 @@ export default class UndoRedoControls extends PureRender {
         <Button
           className="undo"
           isDisabled={!canUndo}
+          type="secondary"
           onClick={onUndoClick}>
           Cofnij
         </Button>
@@ -31,6 +32,7 @@ export default class UndoRedoControls extends PureRender {
         <Button
           className="redo"
           isDisabled={!canRedo}
+          type="secondary"
           onClick={onRedoClick}>
           Ponów
         </Button>

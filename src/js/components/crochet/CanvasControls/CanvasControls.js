@@ -24,22 +24,22 @@ export default class CanvasControls extends PureRender {
 
     return (
       <div className="canvas-controls">
-        <Button onClick={onAddRow}>
+        <Button type="secondary" onClick={onAddRow}>
           Dodaj wiersz
         </Button>
-        <Button onClick={onAdd10Rows}>
+        <Button type="secondary" onClick={onAdd10Rows}>
           Dodaj 10 wierszy
         </Button>
-        <Button onClick={onAddColumn}>
+        <Button type="secondary" onClick={onAddColumn}>
           Dodaj kolumnę
         </Button>
-        <Button onClick={onAdd10Columns}>
+        <Button type="secondary" onClick={onAdd10Columns}>
           Dodaj 10 kolumn
         </Button>
-        <Button onClick={onMirrorVertical}>
+        <Button type="secondary" onClick={onMirrorVertical}>
           Odb. lustrz. pion
         </Button>
-        <Button onClick={onMirrorHorizontal}>
+        <Button type="secondary" onClick={onMirrorHorizontal}>
           Odb. lustrz. poziom
         </Button>
       </div>

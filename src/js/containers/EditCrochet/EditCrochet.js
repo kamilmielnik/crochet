@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'filesaver.js';
+import { bindActionsAndConnect, fileNameNow } from 'utils';
+import { CROTCHET_SIZE_OPTIONS } from 'constants';
 import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
+import { Button, NumberPicker } from 'components/ui';
 import { Crochet } from 'components/crochet';
 import './EditCrochet.scss';
 
@@ -15,7 +19,27 @@ class EditCrochet extends Component {
   componentWillMount = () => {
     const { actions: { crochetNew } } = this.props;
     crochetNew();
-  }
+  };
+
+  onCellSizeChange = cellSize => {
+    const { actions: { crochetCellSizeChange } } = this.props;
+    crochetCellSizeChange(cellSize);
+  };
+
+  onDownloadImage = () => {
+    const crochetElement = document.getElementById('crochet');
+
+    this.enableCrochetScrolling();
+    html2canvas(crochetElement, {
+      onrendered: canvas => {
+        canvas.toBlob(blob => {
+          saveAs(blob, fileNameNow('plik', 'png'));
+        });
+      }
+    }).then(() => {
+      this.disableCrochetScrolling();
+    });
+  };
 
   onCellClick = (rowIndex, columnIndex) => {
     const {
@@ -28,7 +52,15 @@ class EditCrochet extends Component {
     if (currentToolId !== toolId) {
       crochetApplyTool(rowIndex, columnIndex, toolId);
     }
-  }
+  };
+
+  disableCrochetScrolling = () => {
+    // const crochetContainerElement = document.getElementById('crochet-container');
+  };
+
+  enableCrochetScrolling = () => {
+    // const crochetContainerElement = document.getElementById('crochet-container');
+  };
 
   render() {
     const {
@@ -42,14 +74,21 @@ class EditCrochet extends Component {
       }
     } = this.props;
 
-    const menu = (
+    const controls = (
       <div>
-        asdasd asd
+        <NumberPicker
+          value={cellSize}
+          values={CROTCHET_SIZE_OPTIONS}
+          onChange={this.onCellSizeChange} />
+
+        <Button onClick={this.onDownloadImage}>
+          Pobierz do druku
+        </Button>
       </div>
     );
 
     return (
-      <Menu menu={menu} title="Edycja">
+      <Menu controls={controls} title="Edycja">
         <div className="edit-crochet">
           <div className="tools-container">
             <ToolBar

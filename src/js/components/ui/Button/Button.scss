@@ -3,7 +3,6 @@
 
 .button {
   display: block;
-  background: $color-secondary;
   color: $fg-color;
   padding: $spacing-xs $spacing-l;
   margin: $spacing-l 0;
@@ -13,6 +12,30 @@
   border-radius: $spacing-s;
   user-select: none;
 
+  &.primary {
+    background: $color-primary;
+
+    &:hover {
+      background-color: lighten($color-primary, 10%);
+    }
+
+    &:active, &.active {
+      background-color: darken($color-primary, 20%);
+    }
+  }
+
+  &.secondary {
+    background: $color-secondary;
+
+    &:hover {
+      background-color: lighten($color-secondary, 10%);
+    }
+
+    &:active, &.active {
+      background-color: darken($color-secondary, 20%);
+    }
+  }
+
   &:first-child {
     margin-top: 0;
   }
@@ -21,19 +44,10 @@
     outline: 0;
   }
 
-  &:hover {
-    background-color: lighten($color-secondary, 10%);
-  }
-
-  &:active, &.active {
-    background-color: darken($color-secondary, 20%);
-  }
-
   &.is-disabled {
     pointer-events: none;
     color: $color-inactive;
     opacity: 0.2;
-
   }
 
   &.inline {

@@ -40,6 +40,7 @@ export default class ToolsControls extends PureRender {
                       active: value === toolId
                     }
                   )}
+                  type="secondary"
                   onClick={() => onToolClick(value)}>
                   {urlToShow && (
                     <div
