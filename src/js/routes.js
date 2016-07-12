@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router';
 
+import About from 'containers/About/About';
 import App from 'components/App';
 import EditCrochet from 'containers/EditCrochet/EditCrochet';
-import Info from 'containers/Info/Info';
 import NotFound from 'containers/NotFound/NotFound';
 
 export default ([
@@ -11,8 +11,8 @@ export default ([
 
   <Route key="app" path="/" component={App}>
     <Route path="404" component={NotFound} />
-    <Route path="info" component={Info} />
     <Route path="edycja" component={EditCrochet} />
+    <Route path="o-programie" component={About} />
 
     <Redirect from="*" to="/404" />
   </Route>

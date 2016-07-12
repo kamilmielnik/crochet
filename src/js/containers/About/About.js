@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
 import { Link } from 'react-router';
 import { Button } from 'components/ui';
-import './Info.scss';
+import './About.scss';
 
-class Info extends Component {
+class About extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired
   };
 
   render() {
     return (
-      <div className="info">
+      <div className="about">
         <h1>Witaj w <strong>Szydełku</strong>.</h1>
 
         <div>
@@ -98,4 +98,4 @@ class Info extends Component {
   }
 }
 
-export default bindActionsAndConnect(Info, () => ({}));
+export default bindActionsAndConnect(About, () => ({}));

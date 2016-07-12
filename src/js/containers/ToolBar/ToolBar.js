@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
@@ -96,10 +95,7 @@ class ToolBar extends Component {
     } = this.props;
 
     return (
-      <div
-        className={classNames(
-          'tool-bar'
-        )}>
+      <div className="tool-bar">
         <UndoRedoControls
           canRedo={canRedo}
           canUndo={canUndo}

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
+import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
 import { Crochet } from 'components/crochet';
 import './EditCrochet.scss';
@@ -41,17 +42,23 @@ class EditCrochet extends Component {
       }
     } = this.props;
 
-    return (
-      <div className="edit-crochet">
-        <div className="tools-container">
-          <ToolBar
-            canUndo={past.length > 0}
-            canRedo={future.length > 0}
-            cellSize={cellSize} />
-        </div>
+    const menu = (
+      <div>
+        asdasd asd
+      </div>
+    );
 
-        <div className="crochet-container">
-          <div className="crochet">
+    return (
+      <Menu menu={menu} title="Edycja">
+        <div className="edit-crochet">
+          <div className="tools-container">
+            <ToolBar
+              canUndo={past.length > 0}
+              canRedo={future.length > 0}
+              cellSize={cellSize} />
+          </div>
+
+          <div className="crochet-container">
             <Crochet
               id="crochet"
               canvas={canvas}
@@ -59,7 +66,7 @@ class EditCrochet extends Component {
               onCellClick={this.onCellClick} />
           </div>
         </div>
-      </div>
+      </Menu>
     );
   }
 }
