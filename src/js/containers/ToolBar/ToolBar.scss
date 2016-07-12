@@ -1,0 +1,12 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.toolbar {
+  .undo-redo {
+    margin-bottom: $spacing-xl;
+  }
+
+  .canvas-control {
+    margin-top: $spacing-xl;
+  }
+}

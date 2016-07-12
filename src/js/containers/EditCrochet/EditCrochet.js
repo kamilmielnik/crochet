@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionsAndConnect } from 'utils';
-import Tools from '../Tools/Tools';
+import ToolBar from '../ToolBar/ToolBar';
 import { Crochet } from 'components/crochet';
 import './EditCrochet.scss';
 
@@ -44,7 +44,7 @@ class EditCrochet extends Component {
     return (
       <div className="edit-crochet">
         <div className="tools-container">
-          <Tools
+          <ToolBar
             canUndo={past.length > 0}
             canRedo={future.length > 0}
             cellSize={cellSize} />

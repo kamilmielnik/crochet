@@ -44,6 +44,8 @@ function renderContent() {
     - pobierz do pliku json
     - zaladuj z pliku json
     - sekcje w Toolbarze
+    - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container
+    - https://github.com/Flipboard/react-canvas
 
   TODO LOW:
     - numerki wierszy/kolumn
