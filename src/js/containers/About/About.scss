@@ -2,14 +2,18 @@
 @import '~styles/mixins.scss';
 
 .about {
-  padding: 0 $spacing-xxxl;
+  padding: $spacing-xl $spacing-xxxl;
   margin: 0 auto;
   max-width: 1200px;
-  padding-top: 100px;
   text-align: center;
   color: $color-primary;
 
+  .description {
+    padding-top: $spacing-xs;
+  }
+
   ul {
+    padding-top: $spacing-xl;
     font-size: $font-size-s;
     text-align: left;
 
@@ -23,7 +27,7 @@
   }
 
   .cheers {
-    padding-top: $spacing-l;
+    padding-top: $spacing-xl;
     text-align: right;
   }
 
@@ -34,8 +38,7 @@
   }
 
   .button-container {
-    padding-top: $spacing-l;
-    padding-bottom: 100px;
+    padding: $spacing-xl 0;
     max-width: 400px;
     margin: 0 auto;
 

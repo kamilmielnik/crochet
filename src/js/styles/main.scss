@@ -38,7 +38,7 @@ a {
   color: $fg-color;
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -52,6 +52,16 @@ h2 {
   font-size: $font-size-l;
   font-weight: 300;
   margin-top: 0;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 40px;
 }
 
 .ellipsis {

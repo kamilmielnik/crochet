@@ -44,7 +44,7 @@
       > div {
         display: flex;
 
-        > .button {
+        a > .button, > .button {
           margin-top: 0;
           margin-bottom: 0;
           text-align: center;
@@ -60,6 +60,7 @@
   .content {
     flex: 1 1 100%;
     margin-top: $spacing-l;
+    overflow: auto;
 
     > div {
       width: 100%;

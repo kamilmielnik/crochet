@@ -44,6 +44,12 @@
     outline: 0;
   }
 
+  &:active {
+    position: relative;
+    top: 1px;
+    left: 1px;
+  }
+
   &.is-disabled {
     pointer-events: none;
     color: $color-inactive;
