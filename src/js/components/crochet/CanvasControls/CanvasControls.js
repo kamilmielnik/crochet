@@ -23,7 +23,7 @@ export default class CanvasControls extends PureRender {
     } = this.props;
 
     return (
-      <div className="canvas-control">
+      <div className="canvas-controls">
         <Button onClick={onAddRow}>
           Dodaj wiersz
         </Button>

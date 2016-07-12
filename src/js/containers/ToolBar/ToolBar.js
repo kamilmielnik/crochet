@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import classNames from 'classnames';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
 import { CROTCHET_SIZE_OPTIONS } from 'constants';
 import { Button, NumberPicker } from 'components/ui';
-import { CanvasControls, ToolsControls } from 'components/crochet';
+import { CanvasControls, ToolsControls, UndoRedoControls } from 'components/crochet';
 import './ToolBar.scss';
 
 
@@ -99,22 +98,13 @@ class ToolBar extends Component {
     return (
       <div
         className={classNames(
-          'toolbar'
+          'tool-bar'
         )}>
-        <div className="undo-redo">
-          <Button
-            className="undo"
-            isDisabled={!canUndo}
-            onClick={this.onUndo}>
-            Cofnij
-          </Button>
-          <Button
-            className="redo"
-            isDisabled={!canRedo}
-            onClick={this.onRedo}>
-            Ponów
-          </Button>
-        </div>
+        <UndoRedoControls
+          canRedo={canRedo}
+          canUndo={canUndo}
+          onUndoClick={this.onUndo}
+          onRedoClick={this.onRedo} />
 
         <ToolsControls
           toolId={toolId}
