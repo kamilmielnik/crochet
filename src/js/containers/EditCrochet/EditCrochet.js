@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
 import { CROTCHET_SIZE_OPTIONS } from 'constants';
+import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
 import { Button, NumberPicker } from 'components/ui';
@@ -12,13 +13,14 @@ import './EditCrochet.scss';
 class EditCrochet extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    crochet: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired,
+    projects: PropTypes.object.isRequired,
     tool: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions: { crochetNew } } = this.props;
-    crochetNew();
+    const { actions: { projectOpen }, params: { id } } = this.props;
+    projectOpen(id);
   };
 
   onCellSizeChange = cellSize => {
@@ -44,7 +46,7 @@ class EditCrochet extends Component {
   onCellClick = (rowIndex, columnIndex) => {
     const {
       actions: { crochetApplyTool },
-      crochet: { present: { canvas } },
+      projects: { present: { crochet: { canvas } } },
       tool: { toolId }
     } = this.props;
 
@@ -64,12 +66,15 @@ class EditCrochet extends Component {
 
   render() {
     const {
-      crochet: {
+      projects: {
         future,
         past,
         present: {
-          canvas,
-          cellSize
+          crochet: {
+            canvas,
+            cellSize,
+            name
+          }
         }
       }
     } = this.props;
@@ -84,11 +89,17 @@ class EditCrochet extends Component {
         <Button onClick={this.onDownloadImage}>
           Pobierz do druku
         </Button>
+
+        <Link to="/projekty">
+          <Button>
+            Twoje projekty
+          </Button>
+        </Link>
       </div>
     );
 
     return (
-      <Menu controls={controls} title="Edycja">
+      <Menu controls={controls} title={`Edycja - ${name}`}>
         <div className="edit-crochet">
           <div className="tools-container">
             <ToolBar
@@ -111,6 +122,6 @@ class EditCrochet extends Component {
 }
 
 export default bindActionsAndConnect(EditCrochet, state => ({
-  crochet: state.crochet,
+  projects: state.projects,
   tool: state.tool
 }));

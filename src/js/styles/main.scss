@@ -64,6 +64,17 @@ ul {
   -webkit-padding-start: 40px;
 }
 
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-xxxl;
+  color: $color-primary;
+
+  .danger {
+    color: $orange-dark;
+  }
+}
+
 .ellipsis {
   @include ellipsis;
 }

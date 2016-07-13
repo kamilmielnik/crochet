@@ -40,7 +40,7 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - dodac zarzadzanie projektami
+    - use Menu in NotFound
     - pobierz do pliku json
     - zaladuj z pliku json
     - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container

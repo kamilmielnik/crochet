@@ -8,6 +8,9 @@ import {
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW,
+  NEW_PROJECT_NAME_CHANGE,
+  NEW_PROJECT_RESET,
+  PROJECT_OPEN,
   TOOL_CHOOSE
 } from 'constants/actionTypes';
 
@@ -57,11 +60,33 @@ export function crochetMirrorVertical() {
   };
 }
 
-export function crochetNew(width = CROCHET_DEFAULT_COLUMNS, height = CROCHET_DEFAULT_ROWS) {
+export function crochetNew(id, name, width = CROCHET_DEFAULT_COLUMNS, height = CROCHET_DEFAULT_ROWS) {
   return {
     type: CROCHET_NEW,
+    id,
+    name,
     width,
     height
+  };
+}
+
+export function newProjectNameChange(name) {
+  return {
+    type: NEW_PROJECT_NAME_CHANGE,
+    name
+  };
+}
+
+export function newProjectReset() {
+  return {
+    type: NEW_PROJECT_RESET
+  };
+}
+
+export function projectOpen(id) {
+  return {
+    type: PROJECT_OPEN,
+    id
   };
 }
 

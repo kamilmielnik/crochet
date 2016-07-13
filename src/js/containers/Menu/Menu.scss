@@ -44,6 +44,14 @@
       > div {
         display: flex;
 
+        a {
+          margin: 0 $spacing-l;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+
         a > .button, > .button {
           margin-top: 0;
           margin-bottom: 0;

@@ -1,0 +1,15 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.form {
+  max-width: 600px;
+
+  .button {
+    display: inline-block;
+    text-align: center;
+
+    &.submit {
+      padding: $spacing-xs $spacing-xxxl;
+    }
+  }
+}

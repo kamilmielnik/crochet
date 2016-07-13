@@ -1,7 +1,6 @@
 import _ from 'underscore';
-import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
+import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
@@ -13,11 +12,12 @@ import {
 } from 'constants/actionTypes';
 
 const initialState = {
+  id: undefined,
   canvas: [],
   cellSize: CROCHET_SIZE_DEFAULT
 };
 
-export default undoable(reducer(
+export default reducer(
   initialState,
   {
     [CROCHET_ADD_COLUMNS]: (state, action) => {
@@ -127,18 +127,18 @@ export default undoable(reducer(
     },
 
     [CROCHET_NEW]: (state, action) => {
-      const { width, height } = action;
+      const { id, name, width, height } = action;
       const canvas = generateRows(height, width);
 
       return {
         ...initialState,
+        id,
+        name,
         canvas
       };
     }
   }
-), {
-  limit: UNDO_HISTORY_LIMIT
-});
+);
 
 function generateRows(numberOfRows, numberOfColumns) {
   return _.range(0, numberOfRows).map(() => generateRow(numberOfColumns));

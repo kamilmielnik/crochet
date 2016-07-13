@@ -1,0 +1,22 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.projects {
+  .project {
+    padding: $spacing-s $spacing-xl;
+    border-radius: 0;
+  }
+
+  .no-projects {
+    text-align: center;
+
+    .buttons {
+      padding-top: $spacing-l;
+
+      .button {
+        display: inline-block;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

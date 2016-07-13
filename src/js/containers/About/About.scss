@@ -2,11 +2,7 @@
 @import '~styles/mixins.scss';
 
 .about {
-  padding: $spacing-xl $spacing-xxxl;
-  margin: 0 auto;
-  max-width: 1200px;
   text-align: center;
-  color: $color-primary;
 
   .description {
     padding-top: $spacing-xs;

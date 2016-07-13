@@ -13,9 +13,9 @@ class About extends Component {
   render() {
     const controls = (
       <div>
-        <Link to="/edycja">
+        <Link to="/projekty">
           <Button>
-            Przejdź do Twoich projektów
+            Twoje projekty
           </Button>
         </Link>
       </div>
@@ -23,7 +23,7 @@ class About extends Component {
 
     return (
       <Menu controls={controls} title="O programie">
-        <div className="about">
+        <section className="about">
           <h1>Witaj w <strong>Szydełku</strong>.</h1>
 
           <div>
@@ -108,18 +108,18 @@ class About extends Component {
           </div>
 
           <div className="author">
-            © 2016 Kamil Mielnik<br/>
+            © 2016 Kamil Mielnik<br />
             kamil.adam.mielnik@gmail.com
           </div>
 
           <div className="button-container">
-            <Link to="/edycja">
-              <Button type="secondary">
+            <Link to="/projekty">
+              <Button>
                 Przejdź do Twoich projektów
               </Button>
             </Link>
           </div>
-        </div>
+        </section>
       </Menu>
     );
   }
