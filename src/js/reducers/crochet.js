@@ -1,22 +1,17 @@
-import _ from 'underscore';
-import undoable, { excludeAction } from 'redux-undo';
+import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
+import { generateRow, generateRows, initialState } from 'models/crochet';
+import { TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
   CROCHET_CELL_SIZE_CHANGE,
+  CROCHET_LOAD,
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW
 } from 'constants/actionTypes';
-
-const initialState = {
-  id: undefined,
-  canvas: [],
-  cellSize: CROCHET_SIZE_DEFAULT
-};
 
 export default undoable(reducer(
   initialState,
@@ -79,6 +74,14 @@ export default undoable(reducer(
       };
     },
 
+    [CROCHET_LOAD]: (state, action) => {
+      const { crochet } = action;
+      return {
+        ...initialState,
+        ...crochet
+      };
+    },
+
     [CROCHET_MIRROR_HORIZONTAL]: state => {
       const { canvas } = state;
       const mirroredCanvas = canvas.map(row => [...row].reverse());
@@ -128,33 +131,16 @@ export default undoable(reducer(
     },
 
     [CROCHET_NEW]: (state, action) => {
-      const { id, name, numberOfRows, numberOfColumns } = action;
-      const canvas = generateRows(numberOfRows, numberOfColumns);
-
+      const { crochet } = action;
       return {
         ...initialState,
-        id,
-        name,
-        canvas
+        ...crochet
       };
     }
   }
 ), {
-  limit: UNDO_HISTORY_LIMIT,
-  filter: excludeAction(CROCHET_NEW)
+  limit: UNDO_HISTORY_LIMIT
 });
-
-function generateRows(numberOfRows, numberOfColumns) {
-  return _.range(0, numberOfRows).map(() => generateRow(numberOfColumns));
-}
-
-function generateRow(numberOfColumns) {
-  return _.range(0, numberOfColumns).map(generateCell);
-}
-
-function generateCell() {
-  return TOOL_NONE;
-}
 
 function canApplyTool(canvas, { rowIndex, columnIndex }, toolId) {
   if (isRemoveTool(toolId)) {

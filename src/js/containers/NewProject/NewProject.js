@@ -21,10 +21,13 @@ class NewProject extends Component {
   };
 
   onSubmit = () => {
-    const { actions: { crochetNew, redirect }, newProject: { name } } = this.props;
-    const id = generateId();
-    crochetNew(id, name);
-    redirect(`/edycja/${id}`);
+    const { actions: { projectNew, redirect }, newProject: { name } } = this.props;
+    const projectId = generateId('project');
+    const crochetId = generateId('crochet');
+
+    projectNew({ projectId, crochetId, name }, () => {
+      redirect(`/edycja/${crochetId}`);
+    });
   };
 
   render() {

@@ -79,6 +79,11 @@ section {
   @include ellipsis;
 }
 
+// DevTools
+body div#app > div > div + div > div {
+  font-size: 13px;
+}
+
 @media print {
   body {
     background-color: transparent;

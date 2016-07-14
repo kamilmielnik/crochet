@@ -1,30 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import createActionBuffer from 'redux-action-buffer';
-import { autoRehydrate, createTransform, persistStore } from 'redux-persist';
-import { REHYDRATE } from 'redux-persist/constants';
 import { routerMiddleware } from 'react-router-redux';
 import { persistState } from 'redux-devtools';
-import { PERSISTENCE_DEBOUNCE } from 'constants';
 import rootReducer from 'reducers';
 
 export default function configureStore(initialState, history) {
   const store = createStore(rootReducer, initialState, createEnhancer(history));
-  persistStore(store, {
-    whitelist: ['projects'],
-    debounce: PERSISTENCE_DEBOUNCE,
-    transforms: [
-      createTransform(
-        inboundState => ({
-          ...inboundState,
-          crochet: undefined
-        }),
-        outboundState => outboundState,
-        {
-          whitelist: ['projects']
-        }
-      )
-    ]
-  });
   enableWebpackHMRForReducers(store);
   return store;
 }
@@ -40,15 +20,13 @@ function createEnhancer(history) {
 function createProductionMiddleware(history) {
   return applyMiddleware(
     routerMiddleware(history),
-    require('redux-thunk').default,
-    createActionBuffer(REHYDRATE)
+    require('redux-thunk').default
   );
 }
 
 function createProductionEnhancer(middleware) {
   return compose(
-    autoRehydrate(),
-    middleware,
+    middleware
   );
 }
 
@@ -56,8 +34,7 @@ function createDevelopmentMiddleware(history) {
   return applyMiddleware(
     routerMiddleware(history),
     require('redux-thunk').default,
-    require('redux-immutable-state-invariant')(),
-    createActionBuffer(REHYDRATE)
+    require('redux-immutable-state-invariant')()
   );
 }
 
@@ -71,7 +48,6 @@ function createDevelopmentEnhancer(middleware) {
   const devToolsExtension = window.devToolsExtension;
 
   return compose(
-    autoRehydrate(),
     middleware,
     devToolsExtension ? devToolsExtension() : require('../containers/DevTools').default.instrument(),
 

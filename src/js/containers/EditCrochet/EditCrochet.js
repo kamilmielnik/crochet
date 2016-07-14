@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
-import { CROTCHET_SIZE_OPTIONS } from 'constants';
+import { CROTCHET_SIZE_OPTIONS, PERSISTENCE_TIMEOUT } from 'constants';
 import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
@@ -13,14 +13,25 @@ import './EditCrochet.scss';
 class EditCrochet extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    crochet: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
-    projects: PropTypes.object.isRequired,
+    projects: PropTypes.array.isRequired,
     tool: PropTypes.object.isRequired
   };
 
   componentWillMount = () => {
-    const { actions: { projectOpen }, params: { id } } = this.props;
-    projectOpen(id);
+    const { actions: { crochetLoad, crochetSave, projectsLoad }, params: { id } } = this.props;
+    projectsLoad();
+    crochetLoad(id);
+
+    this.autoSave = setInterval(() => {
+      const { crochet: { present: crochet } } = this.props;
+      crochetSave(id, crochet);
+    }, PERSISTENCE_TIMEOUT);
+  };
+
+  componentWillUnmount = () => {
+    this.autoSave = clearInterval(this.autoSave);
   };
 
   onCellSizeChange = cellSize => {
@@ -46,7 +57,7 @@ class EditCrochet extends Component {
   onCellClick = (rowIndex, columnIndex) => {
     const {
       actions: { crochetApplyTool },
-      projects: { crochet: { present: { canvas } } },
+      crochet: { present: { canvas } },
       tool: { toolId }
     } = this.props;
 
@@ -66,18 +77,19 @@ class EditCrochet extends Component {
 
   render() {
     const {
-      projects: {
-        crochet: {
-          future,
-          past,
-          present: {
-            canvas,
-            cellSize,
-            name
-          }
+      crochet: {
+        future,
+        past,
+        present: {
+          projectId,
+          canvas,
+          cellSize
         }
-      }
+      },
+      projects
     } = this.props;
+
+    const { name } = projects.find(project => project.id === projectId) || {};
 
     const controls = (
       <div>
@@ -122,6 +134,7 @@ class EditCrochet extends Component {
 }
 
 export default bindActionsAndConnect(EditCrochet, state => ({
+  crochet: state.crochet,
   projects: state.projects,
   tool: state.tool
 }));

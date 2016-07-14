@@ -1,6 +1,12 @@
-export default function generateId() {
+export default function generateId(prefix) {
   const datePart = Date.now().toString(36);
   const randomPart = Math.random().toString(36);
   const randomPartTrailingZeroRemoved = randomPart.substring(2);
-  return `${datePart}-${randomPartTrailingZeroRemoved}`;
+  const id = `${datePart}-${randomPartTrailingZeroRemoved}`;
+
+  if (prefix) {
+    return `${prefix}-${id}`;
+  }
+
+  return id;
 }

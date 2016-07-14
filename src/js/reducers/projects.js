@@ -1,64 +1,14 @@
 import { reducer } from 'utils';
-import {
-  CROCHET_ADD_COLUMNS,
-  CROCHET_ADD_ROWS,
-  CROCHET_APPLY_TOOL,
-  CROCHET_CELL_SIZE_CHANGE,
-  CROCHET_MIRROR_HORIZONTAL,
-  CROCHET_MIRROR_VERTICAL,
-  CROCHET_NEW,
-  PROJECT_OPEN
-} from 'constants/actionTypes';
-import crochet from './crochet';
+import { PROJECTS_LOAD } from 'constants/actionTypes';
 
-const initialState = {
-  list: {},
-  crochet: crochet()
-};
+const initialState = [];
 
 export default reducer(
   initialState,
   {
-    [CROCHET_ADD_COLUMNS]: updateCrochet,
-    [CROCHET_ADD_ROWS]: updateCrochet,
-    [CROCHET_APPLY_TOOL]: updateCrochet,
-    [CROCHET_CELL_SIZE_CHANGE]: updateCrochet,
-    [CROCHET_MIRROR_HORIZONTAL]: updateCrochet,
-    [CROCHET_MIRROR_VERTICAL]: updateCrochet,
-    [CROCHET_NEW]: updateCrochet,
-
-    [PROJECT_OPEN]: (state, action) => {
-      const { id } = action;
-      const { list: projects } = state;
-      const project = projects[id];
-
-      return {
-        ...state,
-        crochet: project
-      };
+    [PROJECTS_LOAD]: (state, action) => {
+      const { projects } = action;
+      return projects || initialState;
     }
   }
 );
-
-function updateCrochet(state, action) {
-  const updatedCrochet = crochet(state.crochet, action);
-  const { present: { id } } = updatedCrochet;
-
-  return {
-    ...state,
-    list: {
-      ...state.list,
-      [id]: forgetHistory(updatedCrochet)
-    },
-    crochet: updatedCrochet
-  };
-}
-
-function forgetHistory(project) {
-  const { present } = project;
-  return {
-    past: [],
-    future: [],
-    present
-  };
-}

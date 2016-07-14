@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'underscore';
 import { bindActionsAndConnect } from 'utils';
 import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
@@ -9,13 +8,17 @@ import './Projects.scss';
 class Projects extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    projects: PropTypes.object.isRequired
+    projects: PropTypes.array.isRequired
+  };
+
+  componentWillMount = () => {
+    const { actions: { projectsLoad } } = this.props;
+    projectsLoad();
   };
 
   render() {
-    const { projects: { list } } = this.props;
-    const projects = _(list);
-    const numberOfProjects = projects.size();
+    const { projects } = this.props;
+    const numberOfProjects = projects.length;
 
     const controls = (
       <div>
@@ -45,10 +48,10 @@ class Projects extends Component {
           )}
 
           {projects.map(project => {
-            const { present: { id, name } } = project;
+            const { crochetId, name } = project;
 
             return (
-              <Link key={id} to={`/edycja/${id}`}>
+              <Link key={crochetId} to={`/edycja/${crochetId}`}>
                 <Button type="secondary" className="project">
                   {name}
                 </Button>
