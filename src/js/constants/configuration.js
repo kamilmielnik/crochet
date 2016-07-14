@@ -1,7 +1,7 @@
 import _ from 'underscore';
 
-export const CROCHET_DEFAULT_COLUMNS = 30;
-export const CROCHET_DEFAULT_ROWS = 30;
+export const CROCHET_DEFAULT_NUMBER_OF_COLUMNS = 30;
+export const CROCHET_DEFAULT_NUMBER_OF_ROWS = 30;
 
 export const UNDO_HISTORY_LIMIT = 30;
 export const PERSISTENCE_DEBOUNCE = 500;

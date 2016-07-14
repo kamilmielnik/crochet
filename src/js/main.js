@@ -40,7 +40,11 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - use Menu in NotFound
+    - mutowac czy nie mutowac calego obiektu projects przy edycji gry? reducers/projects.js:47-54:
+    - jakims cudem nie ladowac do pamieci calych projects
+    - dodac spinner na componentDidMount w EditCrochet
+    - nie dziala UNDO / REDO
+    - uzyc Menu w NotFound
     - pobierz do pliku json
     - zaladuj z pliku json
     - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container

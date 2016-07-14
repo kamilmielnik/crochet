@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import undoable from 'redux-undo';
+import undoable, { excludeAction } from 'redux-undo';
 import { reducer } from 'utils';
 import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
@@ -128,8 +128,8 @@ export default undoable(reducer(
     },
 
     [CROCHET_NEW]: (state, action) => {
-      const { id, name, width, height } = action;
-      const canvas = generateRows(height, width);
+      const { id, name, numberOfRows, numberOfColumns } = action;
+      const canvas = generateRows(numberOfRows, numberOfColumns);
 
       return {
         ...initialState,
@@ -140,7 +140,8 @@ export default undoable(reducer(
     }
   }
 ), {
-  limit: UNDO_HISTORY_LIMIT
+  limit: UNDO_HISTORY_LIMIT,
+  filter: excludeAction(CROCHET_NEW)
 });
 
 function generateRows(numberOfRows, numberOfColumns) {

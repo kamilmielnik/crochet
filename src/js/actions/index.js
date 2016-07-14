@@ -1,4 +1,4 @@
-import { CROCHET_DEFAULT_COLUMNS, CROCHET_DEFAULT_ROWS } from 'constants';
+import { CROCHET_DEFAULT_NUMBER_OF_COLUMNS, CROCHET_DEFAULT_NUMBER_OF_ROWS } from 'constants';
 import { ActionCreators as ReduxUndoActionCreators } from 'redux-undo';
 import {
   CROCHET_ADD_COLUMNS,
@@ -60,13 +60,13 @@ export function crochetMirrorVertical() {
   };
 }
 
-export function crochetNew(id, name, width = CROCHET_DEFAULT_COLUMNS, height = CROCHET_DEFAULT_ROWS) {
+export function crochetNew(id, name, numberOfRows = CROCHET_DEFAULT_NUMBER_OF_ROWS, numberOfColumns = CROCHET_DEFAULT_NUMBER_OF_COLUMNS) {
   return {
     type: CROCHET_NEW,
     id,
     name,
-    width,
-    height
+    numberOfRows,
+    numberOfColumns
   };
 }
 
