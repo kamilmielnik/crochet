@@ -25,7 +25,7 @@ class Menu extends Component {
             Szydełko
           </div>
 
-          <div className="title">
+          <div className="title ellipsis">
             {title}
           </div>
 

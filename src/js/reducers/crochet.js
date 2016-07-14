@@ -1,6 +1,7 @@
 import _ from 'underscore';
+import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE } from 'constants';
+import { CROCHET_SIZE_DEFAULT, TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
@@ -17,7 +18,7 @@ const initialState = {
   cellSize: CROCHET_SIZE_DEFAULT
 };
 
-export default reducer(
+export default undoable(reducer(
   initialState,
   {
     [CROCHET_ADD_COLUMNS]: (state, action) => {
@@ -138,7 +139,9 @@ export default reducer(
       };
     }
   }
-);
+), {
+  limit: UNDO_HISTORY_LIMIT
+});
 
 function generateRows(numberOfRows, numberOfColumns) {
   return _.range(0, numberOfRows).map(() => generateRow(numberOfColumns));

@@ -1,6 +1,4 @@
-import undoable from 'redux-undo';
 import { reducer } from 'utils';
-import { UNDO_HISTORY_LIMIT } from 'constants';
 import {
   CROCHET_ADD_COLUMNS,
   CROCHET_ADD_ROWS,
@@ -18,7 +16,7 @@ const initialState = {
   crochet: crochet()
 };
 
-export default undoable(reducer(
+export default reducer(
   initialState,
   {
     [CROCHET_ADD_COLUMNS]: updateCrochet,
@@ -40,20 +38,27 @@ export default undoable(reducer(
       };
     }
   }
-), {
-  limit: UNDO_HISTORY_LIMIT
-});
+);
 
 function updateCrochet(state, action) {
   const updatedCrochet = crochet(state.crochet, action);
-  const { id } = updatedCrochet;
+  const { present: { id } } = updatedCrochet;
 
   return {
     ...state,
     list: {
       ...state.list,
-      [id]: updatedCrochet
+      [id]: forgetHistory(updatedCrochet)
     },
     crochet: updatedCrochet
+  };
+}
+
+function forgetHistory(project) {
+  const { present } = project;
+  return {
+    past: [],
+    future: [],
+    present
   };
 }

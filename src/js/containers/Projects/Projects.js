@@ -13,7 +13,7 @@ class Projects extends Component {
   };
 
   render() {
-    const { projects: { present: { list } } } = this.props;
+    const { projects: { list } } = this.props;
     const projects = _(list);
     const numberOfProjects = projects.size();
 
@@ -45,7 +45,7 @@ class Projects extends Component {
           )}
 
           {projects.map(project => {
-            const { id, name } = project;
+            const { present: { id, name } } = project;
 
             return (
               <Link key={id} to={`/edycja/${id}`}>

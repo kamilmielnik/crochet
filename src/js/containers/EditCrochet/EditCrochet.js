@@ -46,7 +46,7 @@ class EditCrochet extends Component {
   onCellClick = (rowIndex, columnIndex) => {
     const {
       actions: { crochetApplyTool },
-      projects: { present: { crochet: { canvas } } },
+      projects: { crochet: { present: { canvas } } },
       tool: { toolId }
     } = this.props;
 
@@ -67,10 +67,10 @@ class EditCrochet extends Component {
   render() {
     const {
       projects: {
-        future,
-        past,
-        present: {
-          crochet: {
+        crochet: {
+          future,
+          past,
+          present: {
             canvas,
             cellSize,
             name

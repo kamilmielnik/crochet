@@ -72,6 +72,7 @@
     "react-router": "2.3.0",
     "react-router-redux": "4.0.5",
     "redux": "3.5.2",
+    "redux-action-buffer": "1.0.1",
     "redux-persist": "3.2.2",
     "redux-thunk": "2.0.1",
     "redux-undo": "1.0.0-beta8",
