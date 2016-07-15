@@ -2,6 +2,10 @@
 @import '~styles/mixins.scss';
 
 .projects {
+  .storage-usage {
+    margin-bottom: $spacing-m;
+  }
+
   .project {
     padding: $spacing-s $spacing-xl;
     border-radius: 0;

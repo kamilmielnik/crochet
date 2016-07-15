@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionsAndConnect } from 'utils';
+import { bindActionsAndConnect, formatPercent } from 'utils';
+import storage from 'storage';
 import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
 import { Button } from 'components/ui';
@@ -33,6 +34,12 @@ class Projects extends Component {
     return (
       <Menu controls={controls} title="Twoje projekty">
         <section className="projects">
+          {numberOfProjects > 0 && (
+            <div className="storage-usage">
+              Zużycie pamięci: {formatPercent(storage.usage, 2)}
+            </div>
+          )}
+
           {numberOfProjects === 0 && (
             <div className="no-projects">
               Nie masz jeszcze żadnych projektów.

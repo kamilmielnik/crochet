@@ -40,7 +40,6 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - dodac spinner na componentDidMount w EditCrochet
     - uzyc Menu w NotFound
     - pobierz do pliku json
     - zaladuj z pliku json
@@ -48,6 +47,7 @@ function renderContent() {
     - https://github.com/Flipboard/react-canvas
 
   TODO LOW:
+    - dodac spinner na componentDidMount w EditCrochet
     - numerki wierszy/kolumn
     - podswietl puste pola
 */
