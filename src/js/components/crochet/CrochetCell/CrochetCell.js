@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import _ from 'underscore';
 import classNames from 'classnames';
 import { TOOLS } from 'constants';
+import { Image } from 'react-canvas';
 import { PureRender } from 'components/base';
 
 const MOUSE_BUTTON_LEFT = 1;
@@ -11,51 +12,25 @@ export default class CrochetCell extends PureRender {
     cellSize: PropTypes.number.isRequired,
     columnIndex: PropTypes.number.isRequired,
     rowIndex: PropTypes.number.isRequired,
-    toolId: PropTypes.number.isRequired,
-    onClick: PropTypes.func.isRequired
+    toolId: PropTypes.number.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.onActivated = _.throttle(() => {
-      const { columnIndex, rowIndex, onClick } = this.props;
-      onClick(rowIndex, columnIndex);
-    }, 1000);
-  }
-
-  onMouseEnter = event => {
-    const { buttons } = event;
-    if (buttons === MOUSE_BUTTON_LEFT) {
-      this.onActivated();
-    }
-  }
-
   render() {
-    const { cellSize, toolId } = this.props;
+    const { cellSize, columnIndex, rowIndex, toolId } = this.props;
     const { height, imageUrl, width } = TOOLS[toolId];
-    const sizeClass = `size-${cellSize}`;
+    const cellStyle = {
+      top: rowIndex * cellSize,
+      left: columnIndex * cellSize,
+      width: cellSize * width,
+      height: cellSize * height
+    };
+
+    if (!imageUrl) {
+      return undefined;
+    }
 
     return (
-      <div
-        className={classNames(
-          'cell',
-          sizeClass
-        )}
-        onMouseDown={this.onActivated}
-        onMouseEnter={this.onMouseEnter}>
-        {imageUrl && (
-          <div
-            className={classNames(
-              'pattern',
-              `height-${height}`,
-              `width-${width}`,
-              sizeClass
-            )}
-            style={{
-              backgroundImage: `url(${imageUrl})`
-            }} />
-        )}
-      </div>
+      <Image src={imageUrl} style={cellStyle} />
     );
   }
 }

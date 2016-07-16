@@ -63,7 +63,16 @@ module.exports = {
         test: /\.(woff|woff2)$/,
         loader: 'url-loader?limit=8192&name=fonts/[name].[ext]?[hash]'
       }
+    ],
+    postLoaders: [
+      {
+        loader: 'transform?brfs'
+      }
     ]
+  },
+  target: 'web',
+  node: {
+    fs: 'empty'
   },
   plugins: [
     new CopyWebpackPlugin([

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Group } from 'react-canvas';
 import { PureRender } from 'components/base';
 import CrochetCell from '../CrochetCell/CrochetCell';
 
@@ -7,7 +8,7 @@ export default class CrochetRow extends PureRender {
     cellSize: PropTypes.number.isRequired,
     row: PropTypes.array.isRequired,
     rowIndex: PropTypes.number.isRequired,
-    onCellClick: PropTypes.func.isRequired
+    style: PropTypes.object
   };
 
   render() {
@@ -15,21 +16,21 @@ export default class CrochetRow extends PureRender {
       cellSize,
       row,
       rowIndex,
+      style,
       onCellClick
     } = this.props;
 
     return (
-      <div className="row">
-        {row.map((cell, columnIndex) => (
+      <Group style={style}>
+        {row.map((toolId, columnIndex) => (
           <CrochetCell
             key={columnIndex}
-            columnIndex={columnIndex}
             cellSize={cellSize}
+            columnIndex={columnIndex}
             rowIndex={rowIndex}
-            toolId={cell}
-            onClick={onCellClick} />
+            toolId={toolId} />
         ))}
-      </div>
+      </Group>
     );
   }
 }
