@@ -40,11 +40,12 @@ function renderContent() {
 
 /*
   TODO HIGH:
+    - https://github.com/Flipboard/react-canvas
+    - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container
     - pobierz do pliku json
     - zaladuj z pliku json
-    - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container
-    - https://github.com/Flipboard/react-canvas
-
+  TODO MEDIUM:
+    - usuwanie projektu
   TODO LOW:
     - dodac spinner na componentDidMount w EditCrochet
     - numerki wierszy/kolumn

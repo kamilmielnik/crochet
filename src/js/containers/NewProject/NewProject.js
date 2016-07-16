@@ -22,8 +22,8 @@ class NewProject extends Component {
 
   onSubmit = () => {
     const { actions: { projectNew, redirect }, newProject: { name } } = this.props;
-    const projectId = generateId('project');
-    const crochetId = generateId('crochet');
+    const projectId = generateId('projekt');
+    const crochetId = generateId('schemat');
 
     projectNew({ projectId, crochetId, name }, () => {
       redirect(`/edycja/${crochetId}`);
