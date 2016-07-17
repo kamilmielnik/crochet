@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "autoprefixer": "6.3.6",
+    "babel-polyfill": "6.9.1",
     "classnames": "2.2.3",
     "filesaver.js": "0.2.0",
     "history": "2.1.0",

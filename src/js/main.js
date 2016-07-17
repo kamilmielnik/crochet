@@ -1,5 +1,6 @@
 import 'node-normalize-scss/_normalize.scss';
 import 'styles/main.scss';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

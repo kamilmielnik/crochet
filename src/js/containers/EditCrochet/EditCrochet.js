@@ -57,8 +57,9 @@ class EditCrochet extends Component {
       tool: { toolId }
     } = this.props;
 
-    const currentToolId = canvas[rowIndex][columnIndex];
-    if (currentToolId !== toolId) {
+    const row = canvas[rowIndex];
+    const currentToolId = row && row[columnIndex];
+    if (currentToolId !== undefined && currentToolId !== toolId) {
       crochetApplyTool(rowIndex, columnIndex, toolId);
     }
   };

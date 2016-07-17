@@ -107,8 +107,8 @@ class About extends Component {
           </div>
 
           <div className="author">
-            © 2016 Kamil Mielnik<br />
-            kamil.adam.mielnik@gmail.com
+            <div>© 2016 Kamil Mielnik</div>
+            <div>kamil.adam.mielnik@gmail.com</div>
           </div>
 
           <div className="button-container">
