@@ -1,5 +1,14 @@
-import React from 'react';
-import { Circle, Group, Line, Rect } from 'react-konva';
+import {
+  ToolNone,
+  ToolOnlyBorders,
+  ToolRectangleEnvelope,
+  ToolRectangleEnvelope90,
+  ToolRectangleEnvelope180,
+  ToolRectangleEnvelope270,
+  ToolSquareCross,
+  ToolSquareDot,
+  ToolSquareSquare
+} from 'components/tools';
 
 export const TOOL_NONE = 0;
 export const TOOL_SQUARE_SQUARE = 1;
@@ -28,7 +37,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_1,
-    draw: () => null
+    Component: ToolNone
   },
 
   [TOOL_SQUARE_EMPTY]: {
@@ -38,7 +47,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_2,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(null)
+    Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
   [TOOL_SQUARE_CROSS]: {
@@ -48,26 +57,7 @@ export const TOOLS = {
     height: 1,
     order: 2,
     group: TOOL_GROUP_2,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Group>
-        <Line
-          lineCap="square"
-          points={[
-            x + 1, y + 1,
-            x + width, y + height
-          ]}
-          strokeWidth={1}
-          stroke={color} />
-        <Line
-          lineCap="square"
-          points={[
-            x + width, y + 1,
-            x + 1, y + height
-          ]}
-          strokeWidth={1}
-          stroke={color} />
-      </Group>
-    )
+    Component: ToolSquareCross
   },
 
   [TOOL_SQUARE_DOT]: {
@@ -77,13 +67,7 @@ export const TOOLS = {
     height: 1,
     order: 3,
     group: TOOL_GROUP_2,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Circle
-        fill={color}
-        radius={Math.ceil(width / 6)}
-        x={x + (width + 1) / 2}
-        y={y + (height + 1) / 2} />
-    )
+    Component: ToolSquareDot
   },
 
   [TOOL_SQUARE_SQUARE]: {
@@ -93,14 +77,7 @@ export const TOOLS = {
     height: 1,
     order: 4,
     group: TOOL_GROUP_2,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Rect
-        fill={color}
-        height={Math.ceil((height + 1) / 3)}
-        width={Math.ceil((width + 1) / 3)}
-        x={x + (width + 1) / 3}
-        y={y + (height + 1) / 3} />
-    )
+    Component: ToolSquareSquare
   },
 
   [TOOL_RECTANGLE_EMPTY]: {
@@ -110,7 +87,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_3,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(null)
+    Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
   [TOOL_RECTANGLE_EMPTY_90]: {
@@ -120,7 +97,7 @@ export const TOOLS = {
     height: 2,
     order: 2,
     group: TOOL_GROUP_3,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(null)
+    Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
   [TOOL_RECTANGLE_ENVELOPE]: {
@@ -131,17 +108,7 @@ export const TOOLS = {
     order: 1,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE_180,
     group: TOOL_GROUP_4,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Line
-        lineCap="square"
-        points={[
-          x + 1, y + 1,
-          x + (width + 1) / 2, y + height,
-          x + width, y + 1
-        ]}
-        strokeWidth={1}
-        stroke={color} />
-    )
+    Component: ToolRectangleEnvelope
   },
 
   [TOOL_RECTANGLE_ENVELOPE_180]: {
@@ -152,17 +119,7 @@ export const TOOLS = {
     order: 2,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE,
     group: TOOL_GROUP_4,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Line
-        lineCap="square"
-        points={[
-          x + 1, y + height,
-          x + (width + 1) / 2, y + 1,
-          x + width, y + height
-        ]}
-        strokeWidth={1}
-        stroke={color} />
-    )
+    Component: ToolRectangleEnvelope180
   },
 
   [TOOL_RECTANGLE_ENVELOPE_270]: {
@@ -173,17 +130,7 @@ export const TOOLS = {
     order: 3,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_90,
     group: TOOL_GROUP_4,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Line
-        lineCap="square"
-        points={[
-          x + width, y + 1,
-          x + 1, y + height / 2,
-          x + width, y + height
-        ]}
-        strokeWidth={1}
-        stroke={color} />
-    )
+    Component: ToolRectangleEnvelope270
   },
 
   [TOOL_RECTANGLE_ENVELOPE_90]: {
@@ -194,54 +141,6 @@ export const TOOLS = {
     order: 4,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_270,
     group: TOOL_GROUP_4,
-    draw: (x, y, height, width, color) => drawBorder(x, y, height, width, color)(
-      <Line
-        lineCap="square"
-        points={[
-          x + 1, y + 1,
-          x + width, y + height / 2,
-          x + 1, y + height
-        ]}
-        strokeWidth={1}
-        stroke={color} />
-    )
+    Component: ToolRectangleEnvelope90
   }
 };
-
-function drawBorder(x, y, height, width, color) {
-  return children => (
-    <Group>
-      <Rect
-        fill="white"
-        height={height - 1}
-        width={width - 1}
-        x={x + 1}
-        y={y + 1} />
-      <Rect
-        fill={color}
-        height={1}
-        width={width}
-        x={x}
-        y={y} />
-      <Rect
-        fill={color}
-        height={1}
-        width={width}
-        x={x}
-        y={y + height} />
-      <Rect
-        fill={color}
-        height={height}
-        width={1}
-        x={x}
-        y={y} />
-      <Rect
-        fill={color}
-        height={height + 1}
-        width={1}
-        x={x + width}
-        y={y} />
-      {children}
-    </Group>
-  );
-}

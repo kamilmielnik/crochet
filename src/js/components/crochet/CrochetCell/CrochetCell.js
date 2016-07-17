@@ -18,15 +18,17 @@ export default class CrochetCell extends PureRender {
 
   render() {
     const { cellSize, color, columnIndex, rowIndex, toolId } = this.props;
-    const { draw, height, width } = TOOLS[toolId];
-    const cellHeight = cellSize * height;
-    const cellWidth = cellSize * width;
-    const x = columnIndex * cellSize;
-    const y = rowIndex * cellSize;
+    const { Component, height, width } = TOOLS[toolId];
 
     return (
       <Group>
-        {draw(x, y, cellHeight, cellWidth, color)}
+        {Component({
+          height: cellSize * height,
+          width: cellSize * width,
+          color,
+          x: columnIndex * cellSize,
+          y: rowIndex * cellSize
+        })}
       </Group>
     );
   }

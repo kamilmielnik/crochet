@@ -40,7 +40,6 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - poprawic wzorki - ladniejsze obrazki
     - pobierz do pliku json
     - zaladuj z pliku json
     - undoable - trzymac w pamieci tylko akcje potrafiace odwrocic stan, nie trzymac stanu, zwiekszyc limit do 1000
