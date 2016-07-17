@@ -1,5 +1,5 @@
 export default function debounceSameArgs(callback, timeout) {
-  let previousArgs = undefined;
+  let previousArgs = null;
   let lastUpdate = 0;
 
   return (...args) => {
@@ -13,5 +13,7 @@ export default function debounceSameArgs(callback, timeout) {
       previousArgs = stringifiedArgs;
       return callback(...args);
     }
+
+    return undefined;
   };
 }

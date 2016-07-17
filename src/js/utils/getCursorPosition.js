@@ -1,15 +1,14 @@
 export default function getCursorPosition(event) {
-  const { target } = event;
-  const { clientX, clientY } = getClientXY(event);
+  const { clientX, clientY, target } = getOriginalEvent(event);
   const rectangle = target.getBoundingClientRect();
   const x = clientX - rectangle.left;
   const y = clientY - rectangle.top;
   return { x, y };
 }
 
-function getClientXY(event) {
-  if (event.changedTouches) {
-    return event.changedTouches[0];
+function getOriginalEvent(event) {
+  if (event.evt) {
+    return event.evt;
   }
 
   return event;

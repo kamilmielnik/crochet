@@ -3,14 +3,10 @@ import 'styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import TouchEmulator from 'touch-emulator';
 import configureStore from './store/configureStore';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
-
-TouchEmulator.template = () => ({ display: 'none' });
-TouchEmulator();
 
 const store = configureStore(undefined, hashHistory);
 const rootElement = document.getElementById('app');
@@ -44,7 +40,6 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - https://github.com/Flipboard/react-canvas
     - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container
     - pobierz do pliku json
     - zaladuj z pliku json

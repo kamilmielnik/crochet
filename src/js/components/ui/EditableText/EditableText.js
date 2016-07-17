@@ -15,7 +15,6 @@ export default class EditableText extends Component {
   static defaultProps = {
     isDisabled: false,
     isEditing: false,
-    inputType: 'text',
     text: '',
     onChange: _.noop
   };
@@ -38,6 +37,7 @@ export default class EditableText extends Component {
       return (
         <input
           {...childProps}
+          type="text"
           value={String(text === undefined ? '' : text)}
           onChange={this.onChange}
           disabled={isDisabled}

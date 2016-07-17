@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
-import { TOOLS } from 'constants';
 import { debounceSameArgs, getCursorPosition } from 'utils';
-import { Group, Image, Layer, Surface } from 'react-canvas';
+import { Layer, Rect, Stage } from 'react-konva';
 import { PureRender } from 'components/base';
 import { CrochetRow } from 'components/crochet';
 import './Crochet.scss';
+
+const MOUSE_BUTTON_LEFT = 1;
 
 export default class Crochet extends PureRender {
   static propTypes = {
@@ -21,6 +22,12 @@ export default class Crochet extends PureRender {
   onClick = event => {
     const { rowIndex, columnIndex } = this.getCellPosition(event);
     this.onCellClickDebounced(rowIndex, columnIndex);
+  };
+
+  onMouseMove = event => {
+    if (event.evt.buttons === MOUSE_BUTTON_LEFT) {
+      this.onClick(event);
+    }
   };
 
   getCellPosition = event => {
@@ -45,9 +52,7 @@ export default class Crochet extends PureRender {
   render() {
     const {
       canvas,
-      cellSize,
-      onCellClick,
-      ...restProps
+      cellSize
     } = this.props;
 
     const numberOfRows = canvas.length;
@@ -55,32 +60,30 @@ export default class Crochet extends PureRender {
     const width = cellSize * numberOfColumns;
     const height = cellSize * numberOfRows;
 
-    const rowStyle = { width, height: cellSize };
-
     return (
-      <Surface
-        className="crochet"
+      <Stage
         width={width}
         height={height}
-        left={0}
-        top={0}>
-        <Group
-          style={{
-            height,
-            width
-          }}
-          onClick={this.onClick}
-          onTouchMove={this.onClick}>
-          {canvas.map((row, rowIndex) => (
-            <CrochetRow
-              key={rowIndex}
-              cellSize={cellSize}
-              row={row}
-              rowIndex={rowIndex}
-              style={rowStyle} />
-          ))}
-        </Group>
-      </Surface>
+        onClick={this.onClick}
+        onMouseMove={this.onMouseMove}>
+        <Layer>
+          <Rect
+            fill="white"
+            x={0}
+            y={0}
+            width={width}
+            height={height} />
+        </Layer>
+
+        {canvas.map((row, rowIndex) => (
+          <CrochetRow
+            key={rowIndex}
+            cellSize={cellSize}
+            row={row}
+            rowIndex={rowIndex}
+            width={width} />
+        ))}
+      </Stage>
     );
   }
 }

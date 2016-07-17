@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
-import _ from 'underscore';
-import classNames from 'classnames';
 import { TOOLS } from 'constants';
-import { Image } from 'react-canvas';
+import { Image } from 'react-konva';
 import { PureRender } from 'components/base';
-
-const MOUSE_BUTTON_LEFT = 1;
 
 export default class CrochetCell extends PureRender {
   static propTypes = {
@@ -15,22 +11,37 @@ export default class CrochetCell extends PureRender {
     toolId: PropTypes.number.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.updateImage(props);
+  }
+
+  componentWillUpdate = newProps => {
+    this.updateImage(newProps);
+  };
+
+  componentWillUnmount = () => {
+    this.image = undefined;
+  };
+
+  updateImage = props => {
+    const { toolId } = props;
+    const { imageUrl = '' } = TOOLS[toolId];
+    this.image = new window.Image();
+    this.image.src = imageUrl;
+  };
+
   render() {
     const { cellSize, columnIndex, rowIndex, toolId } = this.props;
-    const { height, imageUrl, width } = TOOLS[toolId];
-    const cellStyle = {
-      top: rowIndex * cellSize,
-      left: columnIndex * cellSize,
-      width: cellSize * width,
-      height: cellSize * height
-    };
-
-    if (!imageUrl) {
-      return undefined;
-    }
+    const { height, width } = TOOLS[toolId];
 
     return (
-      <Image src={imageUrl} style={cellStyle} />
+      <Image
+        image={this.image}
+        x={columnIndex * cellSize}
+        y={rowIndex * cellSize}
+        width={cellSize * width}
+        height={cellSize * height} />
     );
   }
 }

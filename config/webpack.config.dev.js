@@ -57,16 +57,7 @@ module.exports = {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'url-loader?limit=8192'
       }
-    ],
-    postLoaders: [
-      {
-        loader: 'transform?brfs'
-      }
     ]
-  },
-  target: 'web',
-  node: {
-    fs: 'empty'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),

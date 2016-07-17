@@ -186,7 +186,7 @@ module.exports = {
     "id-blacklist": "off",
     "id-length": ["error", {
         "min": 3,
-        "exceptions": ["_", "id", "to"]
+        "exceptions": ["_", "id", "to", "x", "y"]
     }],
     "id-match": "off",
     "indent": ["error", 2],
