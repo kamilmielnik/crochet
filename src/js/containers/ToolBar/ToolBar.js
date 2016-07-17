@@ -6,6 +6,7 @@ import './ToolBar.scss';
 class ToolBar extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
+    areEmptyCellsHighlighted: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     tool: PropTypes.object.isRequired
@@ -31,6 +32,11 @@ class ToolBar extends Component {
     crochetAddColumns(1);
   };
 
+  onHighlightEmpty = () => {
+    const { actions: { crochetHighlightEmpty }, areEmptyCellsHighlighted } = this.props;
+    crochetHighlightEmpty(!areEmptyCellsHighlighted);
+  };
+
   onMirrorHorizontal = () => {
     const { actions: { crochetMirrorHorizontal } } = this.props;
     crochetMirrorHorizontal();
@@ -54,6 +60,7 @@ class ToolBar extends Component {
   render() {
     const {
       actions: { toolChoose },
+      areEmptyCellsHighlighted,
       canRedo,
       canUndo,
       tool: { toolId }
@@ -72,10 +79,12 @@ class ToolBar extends Component {
           onToolClick={toolChoose} />
 
         <CanvasControls
+          areEmptyCellsHighlighted={areEmptyCellsHighlighted}
           onAdd10Columns={this.onAdd10Columns}
           onAdd10Rows={this.onAdd10Rows}
           onAddColumn={this.onAddColumn}
           onAddRow={this.onAddRow}
+          onHighlightEmpty={this.onHighlightEmpty}
           onMirrorHorizontal={this.onMirrorHorizontal}
           onMirrorVertical={this.onMirrorVertical} />
       </div>

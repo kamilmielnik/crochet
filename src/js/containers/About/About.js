@@ -96,7 +96,7 @@ class About extends Component {
                 (<strong>dobra rada</strong>: eksportuj swoje projekty!)
               </li>
               <li>
-                zawsze możesz przeczytać powyższy tekst ponownie klikając na napis&nbsp;
+                zawsze możesz przeczytać powyższy tekst ponownie, klikając na napis&nbsp;
                 <strong>Szydełko</strong> w lewym, górnym rogu ekranu
               </li>
             </ul>

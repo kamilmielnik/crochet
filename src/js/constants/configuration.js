@@ -15,4 +15,6 @@ export const CHUNK_SIZE = 5;
 export const CELL_INTERACTION_DEBOUNCE = 50;
 
 export const CROCHET_GRID_COLOR = 'lightgray';
+export const CROCHET_GRID_BACKGROUND = 'white';
+export const CROCHET_GRID_BACKGROUND_HIGHLIGHT = '#3E606F';
 export const CROCHET_PATTERN_COLOR = 'black';

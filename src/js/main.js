@@ -46,7 +46,4 @@ function renderContent() {
   TODO MEDIUM:
     - usuwanie projektu
     - bug - gumka nie dziala na polowach wzorkow z width/height === 2
-  TODO LOW:
-    - numerki wierszy/kolumn
-    - podswietl puste pola
 */

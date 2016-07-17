@@ -1,23 +1,28 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import { PureRender } from 'components/base';
 import { Button } from 'components/ui';
 
 export default class CanvasControls extends PureRender {
   static propTypes = {
+    areEmptyCellsHighlighted: PropTypes.bool.isRequired,
     onAdd10Columns: PropTypes.func.isRequired,
     onAdd10Rows: PropTypes.func.isRequired,
     onAddColumn: PropTypes.func.isRequired,
     onAddRow: PropTypes.func.isRequired,
+    onHighlightEmpty: PropTypes.func.isRequired,
     onMirrorHorizontal: PropTypes.func.isRequired,
     onMirrorVertical: PropTypes.func.isRequired
   };
 
   render() {
     const {
+      areEmptyCellsHighlighted,
       onAdd10Columns,
       onAdd10Rows,
       onAddColumn,
       onAddRow,
+      onHighlightEmpty,
       onMirrorHorizontal,
       onMirrorVertical
     } = this.props;
@@ -41,6 +46,14 @@ export default class CanvasControls extends PureRender {
         </Button>
         <Button type="secondary" onClick={onMirrorHorizontal}>
           Odb. lustrz. poziom
+        </Button>
+        <Button
+          type="secondary"
+          className={classNames({
+            active: areEmptyCellsHighlighted
+          })}
+          onClick={onHighlightEmpty}>
+          Podświetl puste
         </Button>
       </div>
     );

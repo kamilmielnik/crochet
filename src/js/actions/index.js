@@ -7,6 +7,7 @@ import {
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
   CROCHET_CELL_SIZE_CHANGE,
+  CROCHET_HIGHLIGHT_EMPTY,
   CROCHET_LOAD,
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
@@ -49,6 +50,13 @@ export function crochetCellSizeChange(cellSize) {
   return {
     type: CROCHET_CELL_SIZE_CHANGE,
     cellSize
+  };
+}
+
+export function crochetHighlightEmpty(shouldEmptyCellsBeHighlighted) {
+  return {
+    type: CROCHET_HIGHLIGHT_EMPTY,
+    shouldEmptyCellsBeHighlighted
   };
 }
 

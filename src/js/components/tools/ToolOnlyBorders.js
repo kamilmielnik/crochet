@@ -1,4 +1,5 @@
 import React from 'react';
+import { CROCHET_GRID_BACKGROUND } from 'constants';
 import { Group, Rect } from 'react-konva';
 
 export default function ToolOnlyBorders(props) {
@@ -7,7 +8,7 @@ export default function ToolOnlyBorders(props) {
   return children => (
     <Group>
       <Rect
-        fill="white"
+        fill={CROCHET_GRID_BACKGROUND}
         height={height - 1}
         width={width - 1}
         x={x + 1}

@@ -71,7 +71,8 @@ class EditCrochet extends Component {
         present: {
           projectId,
           canvas,
-          cellSize
+          cellSize,
+          areEmptyCellsHighlighted
         }
       },
       projects
@@ -103,6 +104,7 @@ class EditCrochet extends Component {
         <div className="edit-crochet">
           <div className="tools-container">
             <ToolBar
+              areEmptyCellsHighlighted={areEmptyCellsHighlighted}
               canUndo={past.length > 0}
               canRedo={future.length > 0}
               cellSize={cellSize} />
@@ -110,6 +112,7 @@ class EditCrochet extends Component {
 
           <div className="crochet-container">
             <Crochet
+              areEmptyCellsHighlighted={areEmptyCellsHighlighted}
               canvas={canvas}
               cellSize={cellSize}
               onCellClick={this.onCellClick} />

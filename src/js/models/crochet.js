@@ -5,7 +5,8 @@ export const initialState = {
   id: undefined,
   projectId: undefined,
   canvas: [],
-  cellSize: CROCHET_SIZE_DEFAULT
+  cellSize: CROCHET_SIZE_DEFAULT,
+  areEmptyCellsHighlighted: false
 };
 
 export default {

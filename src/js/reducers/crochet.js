@@ -7,6 +7,7 @@ import {
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
   CROCHET_CELL_SIZE_CHANGE,
+  CROCHET_HIGHLIGHT_EMPTY,
   CROCHET_LOAD,
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
@@ -71,6 +72,14 @@ export default undoable(reducer(
       return {
         ...state,
         cellSize
+      };
+    },
+
+    [CROCHET_HIGHLIGHT_EMPTY]: (state, action) => {
+      const { shouldEmptyCellsBeHighlighted } = action;
+      return {
+        ...state,
+        areEmptyCellsHighlighted: shouldEmptyCellsBeHighlighted
       };
     },
 

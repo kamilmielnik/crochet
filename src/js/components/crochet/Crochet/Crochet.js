@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import _ from 'underscore';
-import { CELL_INTERACTION_DEBOUNCE, CHUNK_SIZE } from 'constants';
+import {
+  CELL_INTERACTION_DEBOUNCE, CHUNK_SIZE,
+  CROCHET_GRID_BACKGROUND, CROCHET_GRID_BACKGROUND_HIGHLIGHT
+} from 'constants';
 import { debounceSameArgs, getCursorPosition } from 'utils';
 import { Layer, Rect, Stage } from 'react-konva';
 import { PureRender } from 'components/base';
@@ -10,6 +13,7 @@ const MOUSE_BUTTON_LEFT = 1;
 
 export default class Crochet extends PureRender {
   static propTypes = {
+    areEmptyCellsHighlighted: PropTypes.bool,
     canvas: PropTypes.array.isRequired,
     cellSize: PropTypes.number.isRequired,
     onCellClick: PropTypes.func.isRequired
@@ -40,7 +44,7 @@ export default class Crochet extends PureRender {
   };
 
   render() {
-    const { canvas, cellSize } = this.props;
+    const { areEmptyCellsHighlighted, canvas, cellSize } = this.props;
     const numberOfRows = canvas.length;
     const numberOfColumns = numberOfRows === 0 ? 0 : canvas[0].length;
     const width = cellSize * numberOfColumns + 1;
@@ -63,7 +67,7 @@ export default class Crochet extends PureRender {
         onMouseMove={this.onMouseMove}>
         <Layer>
           <Rect
-            fill="white"
+            fill={areEmptyCellsHighlighted ? CROCHET_GRID_BACKGROUND_HIGHLIGHT : CROCHET_GRID_BACKGROUND}
             x={0}
             y={0}
             width={width}
