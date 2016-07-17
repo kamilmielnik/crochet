@@ -1,4 +1,6 @@
 import React, { PropTypes } from 'react';
+import _ from 'underscore';
+import { CELL_INTERACTION_DEBOUNCE, CHUNK_SIZE } from 'constants';
 import { debounceSameArgs, getCursorPosition } from 'utils';
 import { Layer, Rect, Stage } from 'react-konva';
 import { PureRender } from 'components/base';
@@ -16,7 +18,7 @@ export default class Crochet extends PureRender {
   onCellClickDebounced = debounceSameArgs((rowIndex, columnIndex) => {
     const { onCellClick } = this.props;
     onCellClick(rowIndex, columnIndex);
-  }, 50);
+  }, CELL_INTERACTION_DEBOUNCE);
 
   onClick = event => {
     const { rowIndex, columnIndex } = this.getCellPosition(event);
@@ -44,6 +46,14 @@ export default class Crochet extends PureRender {
     const width = cellSize * numberOfColumns;
     const height = cellSize * numberOfRows;
 
+    const numberOfChunks = Math.ceil(numberOfRows / CHUNK_SIZE);
+    const canvasChunks = _.range(numberOfChunks + 1).reduce((chunks, chunkNumber) => {
+      const firstIndex = chunkNumber * CHUNK_SIZE;
+      const chunk = canvas.slice(firstIndex, firstIndex + CHUNK_SIZE);
+      chunks.push(chunk);
+      return chunks;
+    }, []);
+
     return (
       <Stage
         className="crochet"
@@ -60,14 +70,21 @@ export default class Crochet extends PureRender {
             height={height} />
         </Layer>
 
-        {canvas.map((row, rowIndex) => (
-          <CrochetRow
-            key={rowIndex}
-            cellSize={cellSize}
-            row={row}
-            rowIndex={rowIndex}
-            width={width} />
-        ))}
+        {canvasChunks.map((chunk, chunkIndex) => {
+          const chunkBaseIndex = chunkIndex * CHUNK_SIZE;
+          return (
+            <Layer key={chunkIndex}>
+              {chunk.map((row, rowIndex) => (
+                <CrochetRow
+                  key={rowIndex}
+                  cellSize={cellSize}
+                  row={row}
+                  rowIndex={chunkBaseIndex + rowIndex}
+                  width={width} />
+              ))}
+            </Layer>
+          );
+        })}
       </Stage>
     );
   }

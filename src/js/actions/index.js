@@ -75,6 +75,24 @@ export function crochetMirrorVertical() {
   };
 }
 
+export function projectDelete(projectId) {
+  return dispatch => {
+    const projects = storage.getItem('projects', []);
+    const index = projects.findIndex(project => project.id === projectId);
+    const { crochetId } = projects[index];
+    const newProjects = [
+      ...projects.slice(0, index),
+      ...projects.slice(index + 1)
+    ];
+
+    storage.setItem('projects', newProjects);
+    storage.removeItem(projectId);
+    storage.removeItem(crochetId);
+
+    dispatch(projectsLoad());
+  };
+}
+
 export function projectNew(projectData, callback) {
   const {
     projectId,

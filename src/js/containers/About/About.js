@@ -87,8 +87,7 @@ class About extends Component {
               </li>
               <li className="danger">
                 <strong>uwaga</strong>: szybkość działania aplikacji jest&nbsp;
-                odwrotnie proporcjonalna do rozmiaru kanwy Twojego projektu&nbsp;
-                (<strong>dobra rada</strong>: ogranicz swoje projekty do 5-6 tysięcy komórek)
+                odwrotnie proporcjonalna do rozmiaru kanwy Twojego projektu
               </li>
               <li className="danger">
                 <strong>uwaga</strong>: czyszczenie historii przeglądarki internetowej, tryb prywatny,&nbsp;

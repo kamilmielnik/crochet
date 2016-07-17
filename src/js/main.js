@@ -43,9 +43,11 @@ function renderContent() {
     - siatka/grid
     - pobierz do pliku json
     - zaladuj z pliku json
+    - undoable - trzymac w pamieci tylko akcje potrafiace odwrocic stan, nie trzymac stanu, zwiekszyc limit do 1000
   TODO MEDIUM:
     - usuwanie projektu
     - poprawic wzorki - ladniejsze obrazki
+    - bug - gumka nie dziala na polowach wzorkow z width/height === 2
   TODO LOW:
     - numerki wierszy/kolumn
     - podswietl puste pola

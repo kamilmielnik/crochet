@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Group, Layer } from 'react-konva';
+import { Group } from 'react-konva';
 import { PureRender } from 'components/base';
 import CrochetCell from '../CrochetCell/CrochetCell';
 
@@ -20,18 +20,16 @@ export default class CrochetRow extends PureRender {
     } = this.props;
 
     return (
-      <Layer>
-        <Group width={width} height={cellSize}>
-          {row.map((toolId, columnIndex) => (
-            <CrochetCell
-              key={columnIndex}
-              cellSize={cellSize}
-              columnIndex={columnIndex}
-              rowIndex={rowIndex}
-              toolId={toolId} />
-          ))}
-        </Group>
-      </Layer>
+      <Group width={width} height={cellSize}>
+        {row.map((toolId, columnIndex) => (
+          <CrochetCell
+            key={columnIndex}
+            cellSize={cellSize}
+            columnIndex={columnIndex}
+            rowIndex={rowIndex}
+            toolId={toolId} />
+        ))}
+      </Group>
     );
   }
 }
