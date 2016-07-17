@@ -1,15 +1,21 @@
 import React, { PropTypes } from 'react';
 import _ from 'underscore';
+import { CROCHET_GRID_COLOR } from 'constants';
 import { Layer, Rect } from 'react-konva';
 import { PureRender } from 'components/base';
 
 export default class CrochetGrid extends PureRender {
   static propTypes = {
     cellSize: PropTypes.number.isRequired,
+    color: PropTypes.string,
     height: PropTypes.number.isRequired,
     numberOfColumns: PropTypes.number.isRequired,
     numberOfRows: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired
+  };
+
+  static defaultProps = {
+    color: CROCHET_GRID_COLOR
   };
 
   generateHorizontalLines = () => {
@@ -31,11 +37,13 @@ export default class CrochetGrid extends PureRender {
   };
 
   render() {
+    const { color } = this.props;
+
     return (
       <Layer>
         {this.generateHorizontalLines().map(({ width, height, y }, lineIndex) => (
           <Rect
-            fill="black"
+            fill={color}
             key={lineIndex}
             height={height}
             width={width}
@@ -44,7 +52,7 @@ export default class CrochetGrid extends PureRender {
 
         {this.generateVerticalLines().map(({ width, height, x }, lineIndex) => (
           <Rect
-            fill="black"
+            fill={color}
             key={lineIndex}
             height={height}
             width={width}

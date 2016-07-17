@@ -13,3 +13,6 @@ export const CROTCHET_SIZE_OPTIONS = _.range(CROCHET_SIZE_MIN, CROCHET_SIZE_MAX 
 
 export const CHUNK_SIZE = 5;
 export const CELL_INTERACTION_DEBOUNCE = 50;
+
+export const CROCHET_GRID_COLOR = 'lightgray';
+export const CROCHET_PATTERN_COLOR = 'black';

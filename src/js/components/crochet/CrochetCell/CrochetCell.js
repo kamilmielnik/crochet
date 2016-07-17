@@ -1,47 +1,33 @@
 import React, { PropTypes } from 'react';
-import { TOOLS } from 'constants';
-import { Image } from 'react-konva';
+import { CROCHET_PATTERN_COLOR, TOOLS } from 'constants';
+import { Group } from 'react-konva';
 import { PureRender } from 'components/base';
 
 export default class CrochetCell extends PureRender {
   static propTypes = {
     cellSize: PropTypes.number.isRequired,
+    color: PropTypes.string,
     columnIndex: PropTypes.number.isRequired,
     rowIndex: PropTypes.number.isRequired,
     toolId: PropTypes.number.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.updateImage(props);
-  }
-
-  componentWillUpdate = newProps => {
-    this.updateImage(newProps);
-  };
-
-  componentWillUnmount = () => {
-    this.image = undefined;
-  };
-
-  updateImage = props => {
-    const { toolId } = props;
-    const { imageUrl = '' } = TOOLS[toolId];
-    this.image = new window.Image();
-    this.image.src = imageUrl;
+  static defaultProps = {
+    color: CROCHET_PATTERN_COLOR
   };
 
   render() {
-    const { cellSize, columnIndex, rowIndex, toolId } = this.props;
-    const { height, width } = TOOLS[toolId];
+    const { cellSize, color, columnIndex, rowIndex, toolId } = this.props;
+    const { draw, height, width } = TOOLS[toolId];
+    const cellHeight = cellSize * height;
+    const cellWidth = cellSize * width;
+    const x = columnIndex * cellSize;
+    const y = rowIndex * cellSize;
 
     return (
-      <Image
-        image={this.image}
-        x={columnIndex * cellSize}
-        y={rowIndex * cellSize}
-        width={cellSize * width}
-        height={cellSize * height} />
+      <Group>
+        {draw(x, y, cellHeight, cellWidth, color)}
+      </Group>
     );
   }
 }
