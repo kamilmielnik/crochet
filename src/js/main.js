@@ -40,8 +40,6 @@ function renderContent() {
 }
 
 /*
-  TODO HIGH:
+  TODO LOW:
     - undoable - trzymac w pamieci tylko akcje potrafiace odwrocic stan, nie trzymac stanu, zwiekszyc limit do 1000
-  TODO MEDIUM:
-    - bug - gumka nie dziala na polowach wzorkow z width/height === 2
 */

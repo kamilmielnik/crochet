@@ -45,11 +45,26 @@ export default undoable(reducer(
     },
 
     [CROCHET_APPLY_TOOL]: (state, action) => {
-      const { rowIndex, columnIndex, toolId } = action;
+      const {
+        rowIndex: originalRowIndex,
+        columnIndex: originalColumnIndex,
+        toolId
+      } = action;
       const { canvas } = state;
+      let rowIndex = originalRowIndex;
+      let columnIndex = originalColumnIndex;
 
       if (!canApplyTool(canvas, { rowIndex, columnIndex }, toolId)) {
         return state;
+      }
+
+      if (toolId === TOOL_NONE) {
+        if (isLeftNeighborBlocking(canvas, originalRowIndex, originalColumnIndex)) {
+          columnIndex -= 1;
+        }
+        if (isUpperNeighborBlocking(canvas, originalRowIndex, originalColumnIndex)) {
+          rowIndex -= 1;
+        }
       }
 
       return {

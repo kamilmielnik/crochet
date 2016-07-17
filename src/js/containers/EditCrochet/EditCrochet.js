@@ -43,7 +43,7 @@ class EditCrochet extends Component {
 
     const row = canvas[rowIndex];
     const currentToolId = row && row[columnIndex];
-    if (currentToolId !== undefined && currentToolId !== toolId) {
+    if (currentToolId !== undefined/* && currentToolId !== toolId*/) {
       crochetApplyTool(rowIndex, columnIndex, toolId);
     }
   };
