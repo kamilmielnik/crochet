@@ -40,13 +40,13 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - bug z zapisywaniem w png tylko czesci widzialenj, przez overflow: auto w .crochet-container
+    - siatka/grid
     - pobierz do pliku json
     - zaladuj z pliku json
   TODO MEDIUM:
     - usuwanie projektu
+    - poprawic wzorki - ladniejsze obrazki
   TODO LOW:
-    - dodac spinner na componentDidMount w EditCrochet
     - numerki wierszy/kolumn
     - podswietl puste pola
 */

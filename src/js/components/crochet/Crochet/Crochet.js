@@ -3,7 +3,6 @@ import { debounceSameArgs, getCursorPosition } from 'utils';
 import { Layer, Rect, Stage } from 'react-konva';
 import { PureRender } from 'components/base';
 import { CrochetRow } from 'components/crochet';
-import './Crochet.scss';
 
 const MOUSE_BUTTON_LEFT = 1;
 
@@ -17,7 +16,7 @@ export default class Crochet extends PureRender {
   onCellClickDebounced = debounceSameArgs((rowIndex, columnIndex) => {
     const { onCellClick } = this.props;
     onCellClick(rowIndex, columnIndex);
-  }, 100);
+  }, 50);
 
   onClick = event => {
     const { rowIndex, columnIndex } = this.getCellPosition(event);
@@ -38,23 +37,8 @@ export default class Crochet extends PureRender {
     return { rowIndex, columnIndex };
   };
 
-  getCellStyle = (rowIndex, columnIndex) => {
-    const { cellSize } = this.props;
-
-    return {
-      top: rowIndex * cellSize,
-      left: columnIndex * cellSize,
-      width: cellSize,
-      height: cellSize
-    };
-  };
-
   render() {
-    const {
-      canvas,
-      cellSize
-    } = this.props;
-
+    const { canvas, cellSize } = this.props;
     const numberOfRows = canvas.length;
     const numberOfColumns = numberOfRows === 0 ? 0 : canvas[0].length;
     const width = cellSize * numberOfColumns;
@@ -62,6 +46,7 @@ export default class Crochet extends PureRender {
 
     return (
       <Stage
+        className="crochet"
         width={width}
         height={height}
         onClick={this.onClick}

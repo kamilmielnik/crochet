@@ -40,17 +40,13 @@ class EditCrochet extends Component {
   };
 
   onDownloadImage = () => {
-    const crochetElement = document.getElementById('crochet');
-
-    this.enableCrochetScrolling();
+    const crochetElement = document.getElementsByClassName('crochet')[0];
     html2canvas(crochetElement, {
       onrendered: canvas => {
         canvas.toBlob(blob => {
           saveAs(blob, fileNameNow('plik', 'png'));
         });
       }
-    }).then(() => {
-      this.disableCrochetScrolling();
     });
   };
 
@@ -65,14 +61,6 @@ class EditCrochet extends Component {
     if (currentToolId !== toolId) {
       crochetApplyTool(rowIndex, columnIndex, toolId);
     }
-  };
-
-  disableCrochetScrolling = () => {
-    // const crochetContainerElement = document.getElementById('crochet-container');
-  };
-
-  enableCrochetScrolling = () => {
-    // const crochetContainerElement = document.getElementById('crochet-container');
   };
 
   render() {
@@ -122,7 +110,6 @@ class EditCrochet extends Component {
 
           <div className="crochet-container">
             <Crochet
-              id="crochet"
               canvas={canvas}
               cellSize={cellSize}
               onCellClick={this.onCellClick} />
