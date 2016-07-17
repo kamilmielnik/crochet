@@ -34,6 +34,20 @@ class EditCrochet extends Component {
     this.autoSave = clearInterval(this.autoSave);
   };
 
+  onCellClick = (rowIndex, columnIndex) => {
+    const {
+      actions: { crochetApplyTool },
+      crochet: { present: { canvas } },
+      tool: { toolId }
+    } = this.props;
+
+    const row = canvas[rowIndex];
+    const currentToolId = row && row[columnIndex];
+    if (currentToolId !== undefined && currentToolId !== toolId) {
+      crochetApplyTool(rowIndex, columnIndex, toolId);
+    }
+  };
+
   onCellSizeChange = cellSize => {
     const { actions: { crochetCellSizeChange } } = this.props;
     crochetCellSizeChange(cellSize);
@@ -50,18 +64,25 @@ class EditCrochet extends Component {
     });
   };
 
-  onCellClick = (rowIndex, columnIndex) => {
-    const {
-      actions: { crochetApplyTool },
-      crochet: { present: { canvas } },
-      tool: { toolId }
-    } = this.props;
+  onExport = () => {
+    const { crochet: { present: crochet } } = this.props;
+    const project = this.getProject();
+    const projectName = this.getProjectName();
+    const filename = `${projectName}.json`;
+    const data = { crochet, project };
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    saveAs(blob, filename);
+  };
 
-    const row = canvas[rowIndex];
-    const currentToolId = row && row[columnIndex];
-    if (currentToolId !== undefined && currentToolId !== toolId) {
-      crochetApplyTool(rowIndex, columnIndex, toolId);
-    }
+  getProjectName = () => {
+    const { name } = this.getProject();
+    return name;
+  };
+
+  getProject = () => {
+    const { crochet: { present: { projectId } }, projects } = this.props;
+    const project = projects.find(({ id }) => id === projectId) || {};
+    return project;
   };
 
   render() {
@@ -70,16 +91,14 @@ class EditCrochet extends Component {
         future,
         past,
         present: {
-          projectId,
           canvas,
           cellSize,
           areEmptyCellsHighlighted
         }
-      },
-      projects
+      }
     } = this.props;
 
-    const { name } = projects.find(project => project.id === projectId) || {};
+    const projectName = this.getProjectName();
 
     const controls = (
       <div>
@@ -92,6 +111,10 @@ class EditCrochet extends Component {
           Pobierz do druku
         </Button>
 
+        <Button onClick={this.onExport}>
+          Eksportuj
+        </Button>
+
         <Link to="/projekty">
           <Button>
             Twoje projekty
@@ -101,7 +124,7 @@ class EditCrochet extends Component {
     );
 
     return (
-      <Menu controls={controls} title={`Edycja - ${name}`}>
+      <Menu controls={controls} title={`Edycja - ${projectName}`}>
         <div className="edit-crochet">
           <div className="tools-container">
             <ToolBar

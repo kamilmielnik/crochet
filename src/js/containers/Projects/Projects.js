@@ -23,12 +23,48 @@ class Projects extends Component {
     projectDelete(projectId);
   };
 
+  onFileRead = event => {
+    const { actions: { handleError, projectNew, redirect } } = this.props;
+    try {
+      const fileContents = JSON.parse(event.target.result);
+      const { crochet, project } = fileContents;
+      const { id: crochetId, projectId } = crochet;
+      projectNew(
+        {
+          projectId,
+          crochetId,
+          crochet,
+          project
+        },
+        () => redirect(`/edycja/${crochetId}`)
+      );
+    } catch (error) {
+      handleError(`${error.toString()}\n${error.stack}`);
+    }
+  };
+
+  onImport = event => {
+    const file = event.target.files[0];
+    if (file) {
+      const fileReader = new FileReader();
+      fileReader.onload = this.onFileRead;
+      fileReader.readAsText(file);
+    }
+  };
+
   render() {
     const { projects } = this.props;
     const numberOfProjects = projects.length;
 
     const controls = (
       <div>
+        <input id="file" type="file" onChange={this.onImport} />
+        <label htmlFor="file">
+          <Button>
+            Importuj projekt
+          </Button>
+        </label>
+
         <Link to="/nowy-projekt">
           <Button>
             Nowy projekt

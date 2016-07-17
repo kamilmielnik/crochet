@@ -1,6 +1,7 @@
 import _ from 'underscore';
 import { CROCHET_DEFAULT_NUMBER_OF_COLUMNS, CROCHET_DEFAULT_NUMBER_OF_ROWS } from 'constants';
 import { ActionCreators as ReduxUndoActionCreators } from 'redux-undo';
+import { push } from 'react-router-redux';
 import storage from 'storage';
 import {
   CROCHET_ADD_COLUMNS,
@@ -12,6 +13,7 @@ import {
   CROCHET_MIRROR_HORIZONTAL,
   CROCHET_MIRROR_VERTICAL,
   CROCHET_NEW,
+  HANDLE_ERROR,
   NEW_PROJECT_NAME_CHANGE,
   NEW_PROJECT_RESET,
   PROJECTS_LOAD,
@@ -19,7 +21,7 @@ import {
 } from 'constants/actionTypes';
 import { crochetModel, projectModel } from 'models';
 
-export { push as redirect } from 'react-router-redux';
+export const redirect = push;
 export const redo = ReduxUndoActionCreators.redo;
 export const undo = ReduxUndoActionCreators.undo;
 
@@ -101,22 +103,22 @@ export function projectDelete(projectId) {
   };
 }
 
-export function projectNew(projectData, callback) {
+export function projectNew(projectData, callback = _.noop) {
   const {
     projectId,
     crochetId,
     name,
     numberOfRows = CROCHET_DEFAULT_NUMBER_OF_ROWS,
-    numberOfColumns = CROCHET_DEFAULT_NUMBER_OF_COLUMNS
+    numberOfColumns = CROCHET_DEFAULT_NUMBER_OF_COLUMNS,
+    crochet = crochetModel.generate(crochetId, projectId, numberOfRows, numberOfColumns),
+    project = projectModel.generate(projectId, crochetId, name)
   } = projectData;
-
-  const crochet = crochetModel.generate(crochetId, projectId, numberOfRows, numberOfColumns);
-  const project = projectModel.generate(projectId, crochetId, name);
 
   return dispatch => {
     const projects = storage.getItem('projects', []);
-    projects.push(project);
-    storage.setItem('projects', projects);
+    const projectsWithoutOld = projects.filter(({ id }) => id !== projectId);
+    projectsWithoutOld.push(project);
+    storage.setItem('projects', projectsWithoutOld);
 
     dispatch(
       crochetSave(crochetId, crochet, () => {
@@ -135,6 +137,17 @@ export function crochetSave(id, crochet, callback = _.noop) {
   return dispatch => {
     storage.setItem(id, crochet);
     callback(dispatch);
+  };
+}
+
+export function handleError(error) {
+  return dispatch => {
+    dispatch({
+      type: HANDLE_ERROR,
+      error
+    });
+
+    dispatch(redirect('blad'));
   };
 }
 

@@ -41,8 +41,6 @@ function renderContent() {
 
 /*
   TODO HIGH:
-    - pobierz do pliku json
-    - zaladuj z pliku json
     - undoable - trzymac w pamieci tylko akcje potrafiace odwrocic stan, nie trzymac stanu, zwiekszyc limit do 1000
   TODO MEDIUM:
     - bug - gumka nie dziala na polowach wzorkow z width/height === 2
