@@ -4,7 +4,7 @@ import { CELL_INTERACTION_DEBOUNCE, CHUNK_SIZE } from 'constants';
 import { debounceSameArgs, getCursorPosition } from 'utils';
 import { Layer, Rect, Stage } from 'react-konva';
 import { PureRender } from 'components/base';
-import { CrochetRow } from 'components/crochet';
+import { CrochetGrid, CrochetRow } from 'components/crochet';
 
 const MOUSE_BUTTON_LEFT = 1;
 
@@ -43,8 +43,8 @@ export default class Crochet extends PureRender {
     const { canvas, cellSize } = this.props;
     const numberOfRows = canvas.length;
     const numberOfColumns = numberOfRows === 0 ? 0 : canvas[0].length;
-    const width = cellSize * numberOfColumns;
-    const height = cellSize * numberOfRows;
+    const width = cellSize * numberOfColumns + 1;
+    const height = cellSize * numberOfRows + 1;
 
     const numberOfChunks = Math.ceil(numberOfRows / CHUNK_SIZE);
     const canvasChunks = _.range(numberOfChunks + 1).reduce((chunks, chunkNumber) => {
@@ -70,8 +70,15 @@ export default class Crochet extends PureRender {
             height={height} />
         </Layer>
 
+        <CrochetGrid
+          cellSize={cellSize}
+          height={height}
+          numberOfColumns={numberOfColumns}
+          numberOfRows={numberOfRows}
+          width={width} />
+
         {canvasChunks.map((chunk, chunkIndex) => {
-          const chunkBaseIndex = chunkIndex * CHUNK_SIZE;
+          const chunkIndexOffset = chunkIndex * CHUNK_SIZE;
           return (
             <Layer key={chunkIndex}>
               {chunk.map((row, rowIndex) => (
@@ -79,7 +86,7 @@ export default class Crochet extends PureRender {
                   key={rowIndex}
                   cellSize={cellSize}
                   row={row}
-                  rowIndex={chunkBaseIndex + rowIndex}
+                  rowIndex={chunkIndexOffset + rowIndex}
                   width={width} />
               ))}
             </Layer>
