@@ -3,6 +3,7 @@ import { bindActionsAndConnect, formatPercent } from 'utils';
 import storage from 'storage';
 import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
+import { Project } from 'components/projects';
 import { Button } from 'components/ui';
 import './Projects.scss';
 
@@ -15,6 +16,11 @@ class Projects extends Component {
   componentWillMount = () => {
     const { actions: { projectsLoad } } = this.props;
     projectsLoad();
+  };
+
+  onDeleteProjectClick = projectId => {
+    const { actions: { projectDelete } } = this.props;
+    projectDelete(projectId);
   };
 
   render() {
@@ -54,17 +60,12 @@ class Projects extends Component {
             </div>
           )}
 
-          {projects.map(project => {
-            const { crochetId, name } = project;
-
-            return (
-              <Link key={crochetId} to={`/edycja/${crochetId}`}>
-                <Button type="secondary" className="project">
-                  {name}
-                </Button>
-              </Link>
-            );
-          })}
+          {projects.map((project, projectIndex) => (
+            <Project
+              key={projectIndex}
+              project={project}
+              onDelete={this.onDeleteProjectClick} />
+          ))}
         </section>
       </Menu>
     );

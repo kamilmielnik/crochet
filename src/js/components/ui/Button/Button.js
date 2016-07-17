@@ -8,7 +8,7 @@ export default class Button extends Component {
     children: PropTypes.node.isRequired,
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
-    type: PropTypes.oneOf(['primary', 'secondary']),
+    type: PropTypes.oneOf(['primary', 'secondary', 'danger']),
     onClick: PropTypes.func
   };
 

@@ -37,7 +37,8 @@ class About extends Component {
 
             <ul>
               <li>
-                możesz <strong>tworzyć</strong>, <strong>edytować</strong> i <strong>przeglądać</strong> swoje projekty
+                możesz <strong>tworzyć</strong>, <strong>edytować</strong>,&nbsp;
+                <strong>przeglądać</strong> i <strong>usuwać</strong> swoje projekty
               </li>
               <li>
                 możesz umieszczać na kanwie każdy z <strong>10</strong> wbudowanych wzorów

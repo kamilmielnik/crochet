@@ -36,6 +36,19 @@
     }
   }
 
+  &.danger {
+    background: $red-dark;
+    color: white;
+
+    &:hover {
+      background-color: lighten($red-dark, 10%);
+    }
+
+    &:active, &.active {
+      background-color: darken($red-dark, 20%);
+    }
+  }
+
   &:first-child {
     margin-top: 0;
   }
