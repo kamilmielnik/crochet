@@ -46,7 +46,7 @@ class About extends Component {
                 <strong>kliknij</strong> myszką na komórkę kanwy aby umieścić wybrany wzór
               </li>
               <li>
-                <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby ciągle&nbsp;
+                <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby ciągle
                 umieszczać wybrany wzór
               </li>
               <li>
@@ -74,25 +74,25 @@ class About extends Component {
                 <strong>Rozmiar komórki</strong> (zmiana wpłynie również na <strong>wygląd wydruku</strong>)
               </li>
               <li>
-                Twoje projekty są przechowywane na <strong>Twoim komputerze</strong>,&nbsp;
+                Twoje projekty są przechowywane na <strong>Twoim komputerze</strong>,
                 w Twojej przeglądarce internetowej
               </li>
               <li>
                 możesz zapisać swój projekt jako obrazek w formacie <strong>PNG</strong> (do druku)
               </li>
               <li>
-                możesz <strong>eksportować</strong> swój projekt do pliku,&nbsp;
-                aby <strong>importować</strong> go na innym komputerze, albo&nbsp;
+                możesz <strong>eksportować</strong> swój projekt do pliku,
+                aby <strong>importować</strong> go na innym komputerze, albo
                 w celu utworzenia kopii zapasowej
               </li>
               <li className="danger">
-                <strong>uwaga</strong>: szybkość działania aplikacji jest&nbsp;
+                <strong>uwaga</strong>: szybkość działania aplikacji jest
                 odwrotnie proporcjonalna do rozmiaru kanwy Twojego projektu
               </li>
               <li className="danger">
-                <strong>uwaga</strong>: czyszczenie historii przeglądarki internetowej, tryb prywatny,&nbsp;
-                resetowanie, usunięcie i reinstalacja przeglądarki internetowej, a także reinstalacja&nbsp;
-                systemu operacyjnego mogą spowodować utratę wszystkich projektów&nbsp;
+                <strong>uwaga</strong>: czyszczenie historii przeglądarki internetowej, tryb prywatny,
+                resetowanie, usunięcie i reinstalacja przeglądarki internetowej, a także reinstalacja
+                systemu operacyjnego mogą spowodować utratę wszystkich projektów
                 (<strong>dobra rada</strong>: eksportuj swoje projekty!)
               </li>
               <li>
