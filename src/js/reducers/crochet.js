@@ -1,5 +1,4 @@
-import undoable from 'redux-undo';
-import { reducer } from 'utils';
+import { reducer, undoable } from 'utils';
 import { generateRow, generateRows, initialState } from 'models/crochet';
 import { TOOLS, TOOL_NONE, UNDO_HISTORY_LIMIT } from 'constants';
 import {
@@ -7,6 +6,8 @@ import {
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
   CROCHET_CELL_SIZE_CHANGE,
+  CROCHET_DELETE_COLUMNS,
+  CROCHET_DELETE_ROWS,
   CROCHET_HIGHLIGHT_EMPTY,
   CROCHET_LOAD,
   CROCHET_MIRROR_HORIZONTAL,
@@ -48,21 +49,20 @@ export default undoable(reducer(
       const {
         rowIndex: originalRowIndex,
         columnIndex: originalColumnIndex,
-        toolId
+        toolId,
+        isLeftNeighborBlocking,
+        isUpperNeighborBlocking
       } = action;
       const { canvas } = state;
       let rowIndex = originalRowIndex;
       let columnIndex = originalColumnIndex;
 
-      if (!canApplyTool(canvas, { rowIndex, columnIndex }, toolId)) {
-        return state;
-      }
 
       if (toolId === TOOL_NONE) {
-        if (isLeftNeighborBlocking(canvas, originalRowIndex, originalColumnIndex)) {
+        if (isLeftNeighborBlocking) {
           columnIndex -= 1;
         }
-        if (isUpperNeighborBlocking(canvas, originalRowIndex, originalColumnIndex)) {
+        if (isUpperNeighborBlocking) {
           rowIndex -= 1;
         }
       }
@@ -87,6 +87,28 @@ export default undoable(reducer(
       return {
         ...state,
         cellSize
+      };
+    },
+
+    [CROCHET_DELETE_COLUMNS]: (state, action) => {
+      const { numberOfColumns } = action;
+      const { canvas } = state;
+      const currentNumberOfColumns = canvas[0].length;
+
+      return {
+        ...state,
+        canvas: canvas.map(row => row.slice(0, currentNumberOfColumns - numberOfColumns))
+      };
+    },
+
+    [CROCHET_DELETE_ROWS]: (state, action) => {
+      const { numberOfRows } = action;
+      const { canvas } = state;
+      const currentNumberOfRows = canvas.length;
+
+      return {
+        ...state,
+        canvas: canvas.slice(0, currentNumberOfRows - numberOfRows)
       };
     },
 
@@ -163,116 +185,7 @@ export default undoable(reducer(
     }
   }
 ), {
-  limit: UNDO_HISTORY_LIMIT
+  limit: UNDO_HISTORY_LIMIT,
+  resettingActions: [CROCHET_NEW, CROCHET_LOAD]
 });
 
-function canApplyTool(canvas, { rowIndex, columnIndex }, toolId) {
-  if (isRemoveTool(toolId)) {
-    return true;
-  }
-
-  if (isOtherToolUsedAlready(canvas, rowIndex, columnIndex)) {
-    return false;
-  }
-
-  const { width, height } = TOOLS[toolId];
-
-  if (width === 2) {
-    return [
-      !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
-      !isRightNeighborBlocking(canvas, rowIndex, columnIndex),
-      !isTopRightNeighborBlocking(canvas, rowIndex, columnIndex)
-    ].every(Boolean);
-  }
-
-  if (height === 2) {
-    return [
-      !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex),
-      !isBottomNeighborBlocking(canvas, rowIndex, columnIndex),
-      !isBottomLeftNeighborBlocking(canvas, rowIndex, columnIndex)
-    ].every(Boolean);
-  }
-
-  return !areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex);
-}
-
-function isRemoveTool(toolId) {
-  return toolId === TOOL_NONE;
-}
-
-function isOtherToolUsedAlready(canvas, rowIndex, columnIndex) {
-  return canvas[rowIndex][columnIndex] !== TOOL_NONE;
-}
-
-function areLeftOrUpperNeighborsBlocking(canvas, rowIndex, columnIndex) {
-  return [
-    isLeftNeighborBlocking(canvas, rowIndex, columnIndex),
-    isUpperNeighborBlocking(canvas, rowIndex, columnIndex)
-  ].some(Boolean);
-}
-
-function isLeftNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (columnIndex === 0) {
-    return false;
-  }
-
-  const toolId = canvas[rowIndex][columnIndex - 1];
-  const { width } = TOOLS[toolId];
-
-  return width === 2;
-}
-
-function isUpperNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (rowIndex === 0) {
-    return false;
-  }
-
-  const toolId = canvas[rowIndex - 1][columnIndex];
-  const { height } = TOOLS[toolId];
-
-  return height === 2;
-}
-
-function isRightNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (columnIndex === canvas[0].length - 1) {
-    return true;
-  }
-
-  return canvas[rowIndex][columnIndex + 1] !== TOOL_NONE;
-}
-
-function isTopRightNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (rowIndex === 0) {
-    return false;
-  }
-
-  if (columnIndex === canvas[0].length - 1) {
-    return false;
-  }
-
-  const topRightToolId = canvas[rowIndex - 1][columnIndex + 1];
-  const { height: topRightToolHeight } = TOOLS[topRightToolId];
-  return topRightToolHeight === 2;
-}
-
-function isBottomNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (rowIndex === canvas.length - 1) {
-    return true;
-  }
-
-  return canvas[rowIndex + 1][columnIndex] !== TOOL_NONE;
-}
-
-function isBottomLeftNeighborBlocking(canvas, rowIndex, columnIndex) {
-  if (rowIndex === canvas.length - 1) {
-    return false;
-  }
-
-  if (columnIndex === 0) {
-    return false;
-  }
-
-  const bottomLeftToolId = canvas[rowIndex + 1][columnIndex - 1];
-  const { width: bottomLeftToolWidth } = TOOLS[bottomLeftToolId];
-  return bottomLeftToolWidth === 2;
-}

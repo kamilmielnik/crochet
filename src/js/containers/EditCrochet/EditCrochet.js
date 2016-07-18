@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'filesaver.js';
 import { bindActionsAndConnect, fileNameNow } from 'utils';
 import { CROTCHET_SIZE_OPTIONS, PERSISTENCE_TIMEOUT } from 'constants';
+import { canApplyTool } from 'models/collisions';
 import { Link } from 'react-router';
 import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
@@ -30,9 +31,11 @@ class EditCrochet extends Component {
     crochetLoad(id);
 
     this.autoSave = setInterval(() => {
-      const { crochet: { present: crochet } } = this.props;
+      const { crochet: { currentState: crochet } } = this.props;
       this.isSaving = true;
-      crochetSave(id, crochet, () => this.isSaving = false);
+      crochetSave(id, crochet, () => {
+        this.isSaving = false;
+      });
     }, PERSISTENCE_TIMEOUT);
     window.onbeforeunload = this.onBeforeUnload;
   };
@@ -47,19 +50,21 @@ class EditCrochet extends Component {
       event.returnValue = null;
       return null;
     }
+
+    return undefined;
   };
 
   onCellClick = (rowIndex, columnIndex) => {
     const {
       actions: { crochetApplyTool },
-      crochet: { present: { canvas } },
+      crochet: { currentState: { canvas } },
       tool: { toolId }
     } = this.props;
 
     const row = canvas[rowIndex];
     const currentToolId = row && row[columnIndex];
-    if (currentToolId !== undefined) {
-      crochetApplyTool(rowIndex, columnIndex, toolId);
+    if (currentToolId !== undefined && canApplyTool(canvas, { rowIndex, columnIndex }, toolId)) {
+      crochetApplyTool(canvas, rowIndex, columnIndex, toolId);
     }
   };
 
@@ -69,18 +74,19 @@ class EditCrochet extends Component {
   };
 
   onDownloadImage = () => {
+    const projectName = this.getProjectName();
     const crochetElement = document.getElementsByClassName('crochet')[0];
     html2canvas(crochetElement, {
       onrendered: canvas => {
         canvas.toBlob(blob => {
-          saveAs(blob, fileNameNow('plik', 'png'));
+          saveAs(blob, fileNameNow(projectName, 'png'));
         });
       }
     });
   };
 
   onExport = () => {
-    const { crochet: { present: crochet } } = this.props;
+    const { crochet: { currentState: crochet } } = this.props;
     const project = this.getProject();
     const projectName = this.getProjectName();
     const filename = `${projectName}.json`;
@@ -94,7 +100,7 @@ class EditCrochet extends Component {
     this.componentWillUnmount();
     const {
       actions: { crochetSave, redirect },
-      crochet: { present: crochet },
+      crochet: { currentState: crochet },
       params: { id }
     } = this.props;
     crochetSave(id, crochet, () => redirect('/projekty'));
@@ -106,7 +112,7 @@ class EditCrochet extends Component {
   };
 
   getProject = () => {
-    const { crochet: { present: { projectId } }, projects } = this.props;
+    const { crochet: { currentState: { projectId } }, projects } = this.props;
     const project = projects.find(({ id }) => id === projectId) || {};
     return project;
   };
@@ -114,9 +120,9 @@ class EditCrochet extends Component {
   render() {
     const {
       crochet: {
-        future,
-        past,
-        present: {
+        futureActions,
+        pastActions,
+        currentState: {
           canvas,
           cellSize,
           areEmptyCellsHighlighted
@@ -155,8 +161,8 @@ class EditCrochet extends Component {
           <div className="tools-container">
             <ToolBar
               areEmptyCellsHighlighted={areEmptyCellsHighlighted}
-              canUndo={past.length > 0}
-              canRedo={future.length > 0}
+              canUndo={pastActions.length > 0}
+              canRedo={futureActions.length > 0}
               cellSize={cellSize} />
           </div>
 

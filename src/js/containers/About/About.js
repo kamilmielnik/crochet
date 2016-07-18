@@ -57,7 +57,7 @@ class About extends Component {
                 w razie pomyłki możesz skorzystać z narzędzi <strong>Gumka</strong> i <strong>Cofnij</strong>
               </li>
               <li>
-                aplikacja pamięta <strong>30</strong> Twoich ostatnich zmian
+                aplikacja pamięta <strong>500</strong> Twoich ostatnich zmian
               </li>
               <li>
                 możesz przekształcić swój projekt korzystając z narzędzi&nbsp;

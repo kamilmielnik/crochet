@@ -6,3 +6,4 @@ export generateId from './generateId';
 export getCursorPosition from './getCursorPosition';
 export reducer from './reducer';
 export renderConditionally from './renderConditionally';
+export undoable from './undoable';

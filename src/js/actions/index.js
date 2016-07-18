@@ -1,6 +1,8 @@
 import _ from 'underscore';
-import { CROCHET_DEFAULT_NUMBER_OF_COLUMNS, CROCHET_DEFAULT_NUMBER_OF_ROWS } from 'constants';
-import { ActionCreators as ReduxUndoActionCreators } from 'redux-undo';
+import {
+  CROCHET_DEFAULT_NUMBER_OF_COLUMNS, CROCHET_DEFAULT_NUMBER_OF_ROWS,
+  TOOL_NONE
+} from 'constants';
 import { push } from 'react-router-redux';
 import storage from 'storage';
 import {
@@ -8,6 +10,8 @@ import {
   CROCHET_ADD_ROWS,
   CROCHET_APPLY_TOOL,
   CROCHET_CELL_SIZE_CHANGE,
+  CROCHET_DELETE_COLUMNS,
+  CROCHET_DELETE_ROWS,
   CROCHET_HIGHLIGHT_EMPTY,
   CROCHET_LOAD,
   CROCHET_MIRROR_HORIZONTAL,
@@ -17,34 +21,89 @@ import {
   NEW_PROJECT_NAME_CHANGE,
   NEW_PROJECT_RESET,
   PROJECTS_LOAD,
-  TOOL_CHOOSE
+  TOOL_CHOOSE,
+  UNDOABLE_REDO,
+  UNDOABLE_UNDO
 } from 'constants/actionTypes';
 import { crochetModel, projectModel } from 'models';
+import { isLeftNeighborBlocking, isUpperNeighborBlocking } from 'models/collisions';
 
 export const redirect = push;
-export const redo = ReduxUndoActionCreators.redo;
-export const undo = ReduxUndoActionCreators.undo;
 
 export function crochetAddColumns(numberOfColumns) {
   return {
     type: CROCHET_ADD_COLUMNS,
-    numberOfColumns
+    numberOfColumns,
+    reverseAction: {
+      type: CROCHET_DELETE_COLUMNS,
+      numberOfColumns
+    }
   };
 }
 
 export function crochetAddRows(numberOfRows) {
   return {
     type: CROCHET_ADD_ROWS,
-    numberOfRows
+    numberOfRows,
+    reverseAction: {
+      type: CROCHET_DELETE_ROWS,
+      numberOfRows
+    }
   };
 }
 
-export function crochetApplyTool(rowIndex, columnIndex, toolId) {
+export function crochetApplyTool(canvas, rowIndex, columnIndex, toolId) {
+  if (toolId === TOOL_NONE) {
+    return crochetApplyRubberTool(canvas, rowIndex, columnIndex);
+  }
+
   return {
     type: CROCHET_APPLY_TOOL,
     rowIndex,
     columnIndex,
-    toolId
+    toolId,
+    isLeftNeighborBlocking: isLeftNeighborBlocking(canvas, rowIndex, columnIndex),
+    isUpperNeighborBlocking: isUpperNeighborBlocking(canvas, rowIndex, columnIndex),
+    reverseAction: {
+      type: CROCHET_APPLY_TOOL,
+      rowIndex,
+      columnIndex,
+      toolId: TOOL_NONE,
+      isLeftNeighborBlocking: false,
+      isUpperNeighborBlocking: false
+    }
+  };
+}
+
+export function crochetApplyRubberTool(canvas, rowIndex, columnIndex) {
+  let reverseRowIndex = rowIndex;
+  let reverseColumnIndex = columnIndex;
+
+  if (isLeftNeighborBlocking(canvas, rowIndex, columnIndex)) {
+    reverseColumnIndex = columnIndex - 1;
+  }
+
+  if (isUpperNeighborBlocking(canvas, rowIndex, columnIndex)) {
+    reverseRowIndex = rowIndex - 1;
+  }
+
+  const reverseTool = canvas[reverseRowIndex][reverseColumnIndex];
+
+  return {
+    type: CROCHET_APPLY_TOOL,
+    rowIndex,
+    columnIndex,
+    toolId: TOOL_NONE,
+    isLeftNeighborBlocking: isLeftNeighborBlocking(canvas, rowIndex, columnIndex),
+    isUpperNeighborBlocking: isUpperNeighborBlocking(canvas, rowIndex, columnIndex),
+    reverseAction: {
+      type: CROCHET_APPLY_TOOL,
+      rowIndex: reverseRowIndex,
+      columnIndex: reverseColumnIndex,
+      toolId: reverseTool,
+      isLeftNeighborBlocking: false,
+      isUpperNeighborBlocking: false
+    }
   };
 }
 
@@ -52,6 +111,20 @@ export function crochetCellSizeChange(cellSize) {
   return {
     type: CROCHET_CELL_SIZE_CHANGE,
     cellSize
+  };
+}
+
+export function crochetDeleteColumns(numberOfColumns) {
+  return {
+    type: CROCHET_DELETE_COLUMNS,
+    numberOfColumns
+  };
+}
+
+export function crochetDeleteRows(numberOfRows) {
+  return {
+    type: CROCHET_DELETE_ROWS,
+    numberOfRows
   };
 }
 
@@ -75,13 +148,19 @@ export function crochetLoad(id) {
 
 export function crochetMirrorHorizontal() {
   return {
-    type: CROCHET_MIRROR_HORIZONTAL
+    type: CROCHET_MIRROR_HORIZONTAL,
+    reverseAction: {
+      type: CROCHET_MIRROR_HORIZONTAL
+    }
   };
 }
 
 export function crochetMirrorVertical() {
   return {
-    type: CROCHET_MIRROR_VERTICAL
+    type: CROCHET_MIRROR_VERTICAL,
+    reverseAction: {
+      type: CROCHET_MIRROR_VERTICAL
+    }
   };
 }
 
@@ -179,5 +258,17 @@ export function toolChoose(toolId) {
   return {
     type: TOOL_CHOOSE,
     toolId
+  };
+}
+
+export function undoableRedo() {
+  return {
+    type: UNDOABLE_REDO
+  };
+}
+
+export function undoableUndo() {
+  return {
+    type: UNDOABLE_UNDO
   };
 }

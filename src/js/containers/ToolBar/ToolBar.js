@@ -48,13 +48,13 @@ class ToolBar extends Component {
   };
 
   onRedo = () => {
-    const { actions: { redo } } = this.props;
-    redo();
+    const { actions: { undoableRedo } } = this.props;
+    undoableRedo();
   };
 
   onUndo = () => {
-    const { actions: { undo } } = this.props;
-    undo();
+    const { actions: { undoableUndo } } = this.props;
+    undoableUndo();
   };
 
   render() {

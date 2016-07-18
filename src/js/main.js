@@ -38,8 +38,3 @@ function renderContent() {
     </div>
   );
 }
-
-/*
-  TODO LOW:
-    - undoable - trzymac w pamieci tylko akcje potrafiace odwrocic stan, nie trzymac stanu, zwiekszyc limit do 1000
-*/
