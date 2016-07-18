@@ -19,6 +19,11 @@ class EditCrochet extends Component {
     tool: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.isSaving = false;
+  }
+
   componentWillMount = () => {
     const { actions: { crochetLoad, crochetSave, projectsLoad }, params: { id } } = this.props;
     projectsLoad();
@@ -26,12 +31,22 @@ class EditCrochet extends Component {
 
     this.autoSave = setInterval(() => {
       const { crochet: { present: crochet } } = this.props;
-      crochetSave(id, crochet);
+      this.isSaving = true;
+      crochetSave(id, crochet, () => this.isSaving = false);
     }, PERSISTENCE_TIMEOUT);
+    window.onbeforeunload = this.onBeforeUnload;
   };
 
   componentWillUnmount = () => {
     this.autoSave = clearInterval(this.autoSave);
+    window.onbeforeunload = undefined;
+  };
+
+  onBeforeUnload = event => {
+    if (this.isSaving) {
+      event.returnValue = null;
+      return null;
+    }
   };
 
   onCellClick = (rowIndex, columnIndex) => {
@@ -43,7 +58,7 @@ class EditCrochet extends Component {
 
     const row = canvas[rowIndex];
     const currentToolId = row && row[columnIndex];
-    if (currentToolId !== undefined/* && currentToolId !== toolId*/) {
+    if (currentToolId !== undefined) {
       crochetApplyTool(rowIndex, columnIndex, toolId);
     }
   };
@@ -72,6 +87,17 @@ class EditCrochet extends Component {
     const data = { crochet, project };
     const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
     saveAs(blob, filename);
+  };
+
+  onGoToProjects = event => {
+    event.preventDefault();
+    this.componentWillUnmount();
+    const {
+      actions: { crochetSave, redirect },
+      crochet: { present: crochet },
+      params: { id }
+    } = this.props;
+    crochetSave(id, crochet, () => redirect('/projekty'));
   };
 
   getProjectName = () => {
@@ -115,7 +141,7 @@ class EditCrochet extends Component {
           Eksportuj
         </Button>
 
-        <Link to="/projekty">
+        <Link to="/projekty" onClick={this.onGoToProjects}>
           <Button>
             Twoje projekty
           </Button>
