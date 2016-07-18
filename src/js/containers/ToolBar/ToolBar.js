@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'underscore';
+import { KEY_Y, KEY_Z, TOOLS } from 'constants';
 import { bindActionsAndConnect } from 'utils';
 import { CanvasControls, ToolsControls, UndoRedoControls } from 'components/crochet';
 import './ToolBar.scss';
@@ -10,6 +12,14 @@ class ToolBar extends Component {
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     tool: PropTypes.object.isRequired
+  };
+
+  componentWillMount = () => {
+    document.addEventListener('keydown', this.onKeyDown);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener('keydown', this.onKeyDown);
   };
 
   onAdd10Rows = () => {
@@ -30,6 +40,26 @@ class ToolBar extends Component {
   onAddColumn = () => {
     const { actions: { crochetAddColumns } } = this.props;
     crochetAddColumns(1);
+  };
+
+  onKeyDown = event => {
+    const { actions: { toolChoose }, canRedo, canUndo } = this.props;
+    const { keyCode, ctrlKey } = event;
+
+    if (ctrlKey) {
+      if (keyCode === KEY_Y && canRedo) {
+        this.onRedo();
+      }
+
+      if (keyCode === KEY_Z && canUndo) {
+        this.onUndo();
+      }
+    } else {
+      const { toolId } = _(TOOLS).find(({ keyCode: toolKeyCode }) => keyCode === toolKeyCode) || {};
+      if (toolId !== undefined) {
+        toolChoose(toolId);
+      }
+    }
   };
 
   onHighlightEmpty = () => {

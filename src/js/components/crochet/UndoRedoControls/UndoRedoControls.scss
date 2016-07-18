@@ -2,21 +2,37 @@
 @import '~styles/mixins.scss';
 
 .undo-redo-controls {
-  display: flex;
-  align-items: center;
+  .controls, .keys {
+    display: flex;
+    align-items: center;
 
-  .redo, .undo {
-    margin: 0;
-    display: inline-block;
-    flex: 1 1 50%;
+    .redo, .undo {
+      margin: 0;
+      display: inline-block;
+      flex: 1 1 50%;
+      text-align: center;
+    }
+
+    .redo {
+      margin-left: $spacing-s;
+    }
+
+    .undo {
+      margin-right: $spacing-s;
+    }
+  }
+
+  .keys {
+    position: relative;
+    top: $spacing-xs;
+    font-size: $font-size-xxs;
+    font-weight: bold;
     text-align: center;
-  }
+    text-transform: uppercase;
+    color: $darken;
 
-  .redo {
-    margin-left: $spacing-s;
-  }
-
-  .undo {
-    margin-right: $spacing-s;
+    .is-disabled {
+      opacity: $opacity-disabled;
+    }
   }
 }

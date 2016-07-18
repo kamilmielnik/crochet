@@ -44,6 +44,11 @@ class About extends Component {
                 możesz umieszczać na kanwie każdy z <strong>10</strong> wbudowanych wzorów
               </li>
               <li>
+                możesz wybrać wzór do rysowania z paska narzędzi po lewej stronie ekranu,
+                lub za pomocą <strong>klawiszy</strong> na klawiaturze (wzory na pasku po lewej
+                stronie podpisane są odpowiadającymi im klawiszami)
+              </li>
+              <li>
                 <strong>kliknij</strong> myszką na komórkę kanwy aby umieścić wybrany wzór
               </li>
               <li>
@@ -58,6 +63,10 @@ class About extends Component {
               </li>
               <li>
                 aplikacja pamięta <strong>500</strong> Twoich ostatnich zmian
+              </li>
+              <li>
+                możesz korzystać ze skrótów klawiaturowych dla narzędzi <strong>Cofnij</strong> (Ctrl + Z)
+                i <strong>Ponów</strong> (Ctrl + Y)
               </li>
               <li>
                 możesz przekształcić swój projekt korzystając z narzędzi&nbsp;

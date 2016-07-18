@@ -7,17 +7,8 @@ $pattern-size: 24px;
   .tools-group {
     display: flex;
 
-    .tool {
-      @include const-size(2 * $pattern-size + 2 * $spacing-xs);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: $spacing-xs;
+    .key, .tool {
       margin: $spacing-s $spacing-xs;
-
-      &.active {
-        font-weight: bold;
-      }
 
       &:first-child {
         margin-left: 0;
@@ -25,6 +16,18 @@ $pattern-size: 24px;
 
       &:last-child {
         margin-right: 0;
+      }
+    }
+
+    .tool {
+      @include const-size(2 * $pattern-size + 2 * $spacing-xs);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $spacing-xs;
+
+      &.active {
+        font-weight: bold;
       }
 
       .tool-image {
@@ -40,6 +43,18 @@ $pattern-size: 24px;
           height: 2 * $pattern-size;
         }
       }
+    }
+
+    .key {
+      @include const-width(2 * $pattern-size + 2 * $spacing-xs);
+      position: relative;
+      top: -$spacing-xs;
+      margin: 0 $spacing-xs;
+      font-size: $font-size-xxs;
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      color: $darken;
     }
   }
 }

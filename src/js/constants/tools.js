@@ -1,4 +1,10 @@
 import {
+  KEY_1,
+  KEY_Q, KEY_W, KEY_E, KEY_R,
+  KEY_A, KEY_S,
+  KEY_Z, KEY_X, KEY_C, KEY_V
+} from 'constants';
+import {
   ToolNone,
   ToolOnlyBorders,
   ToolRectangleEnvelope,
@@ -37,6 +43,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_1,
+    keyCode: KEY_1,
     Component: ToolNone
   },
 
@@ -47,6 +54,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_2,
+    keyCode: KEY_Q,
     Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
@@ -57,6 +65,7 @@ export const TOOLS = {
     height: 1,
     order: 2,
     group: TOOL_GROUP_2,
+    keyCode: KEY_W,
     Component: ToolSquareCross
   },
 
@@ -67,6 +76,7 @@ export const TOOLS = {
     height: 1,
     order: 3,
     group: TOOL_GROUP_2,
+    keyCode: KEY_E,
     Component: ToolSquareDot
   },
 
@@ -77,6 +87,7 @@ export const TOOLS = {
     height: 1,
     order: 4,
     group: TOOL_GROUP_2,
+    keyCode: KEY_R,
     Component: ToolSquareSquare
   },
 
@@ -87,6 +98,7 @@ export const TOOLS = {
     height: 1,
     order: 1,
     group: TOOL_GROUP_3,
+    keyCode: KEY_A,
     Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
@@ -97,6 +109,7 @@ export const TOOLS = {
     height: 2,
     order: 2,
     group: TOOL_GROUP_3,
+    keyCode: KEY_S,
     Component: props => ToolOnlyBorders(props)(ToolNone())
   },
 
@@ -108,6 +121,7 @@ export const TOOLS = {
     order: 1,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE_180,
     group: TOOL_GROUP_4,
+    keyCode: KEY_Z,
     Component: ToolRectangleEnvelope
   },
 
@@ -119,6 +133,7 @@ export const TOOLS = {
     order: 2,
     mirrorVertical: TOOL_RECTANGLE_ENVELOPE,
     group: TOOL_GROUP_4,
+    keyCode: KEY_X,
     Component: ToolRectangleEnvelope180
   },
 
@@ -130,6 +145,7 @@ export const TOOLS = {
     order: 3,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_90,
     group: TOOL_GROUP_4,
+    keyCode: KEY_C,
     Component: ToolRectangleEnvelope270
   },
 
@@ -141,6 +157,7 @@ export const TOOLS = {
     order: 4,
     mirrorHorizontal: TOOL_RECTANGLE_ENVELOPE_270,
     group: TOOL_GROUP_4,
+    keyCode: KEY_V,
     Component: ToolRectangleEnvelope90
   }
 };

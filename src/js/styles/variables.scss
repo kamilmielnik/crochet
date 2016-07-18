@@ -5,6 +5,7 @@ $font-size-l:               36px;
 $font-size-m:               26px;
 $font-size-s:               24px;
 $font-size-xs:              18px;
+$font-size-xxs:             14px;
 
 $spacing-xxs:               2px;
 $spacing-xs:                5px;
@@ -30,6 +31,8 @@ $bg-color:                  $color-primary-light;
 $border-solid:              1px solid $color-border;
 $border-dotted:             1px dotted $color-border;
 $border-transparent:        1px solid transparent;
+
+$opacity-disabled:          0.2;
 
 $min-crochet-size:          8;
 $max-crochet-size:          30;

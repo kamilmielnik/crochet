@@ -27,36 +27,50 @@ export default class ToolsControls extends PureRender {
     return (
       <div className="tools-controls">
         {_(toolsGroups).map((group, groupKey) => (
-          <div key={groupKey} className="tools-group">
-            {group.map(({ value, label }) => {
-              const { height, imageUrl, iconUrl, width } = TOOLS[value];
-              const urlToShow = imageUrl || iconUrl;
-              return (
-                <Button
-                  key={value}
-                  className={classNames(
-                    'tool',
-                    {
-                      active: value === toolId
-                    }
-                  )}
-                  type="secondary"
-                  onClick={() => onToolClick(value)}>
-                  {urlToShow && (
-                    <div
-                      className={classNames(
-                        'tool-image',
-                        `height-${height}`,
-                        `width-${width}`
-                      )}
-                      style={{
-                        backgroundImage: `url(${urlToShow})`
-                      }} />
-                  )}
-                  {!urlToShow && label}
-                </Button>
-              );
-            })}
+          <div key={groupKey}>
+            <div className="tools-group">
+              {group.map(({ value, label }) => {
+                const { height, imageUrl, iconUrl, width } = TOOLS[value];
+                const urlToShow = imageUrl || iconUrl;
+                return (
+                  <Button
+                    key={value}
+                    className={classNames(
+                      'tool',
+                      {
+                        active: value === toolId
+                      }
+                    )}
+                    type="secondary"
+                    onClick={() => onToolClick(value)}>
+                    {urlToShow && (
+                      <div
+                        className={classNames(
+                          'tool-image',
+                          `height-${height}`,
+                          `width-${width}`
+                        )}
+                        style={{
+                          backgroundImage: `url(${urlToShow})`
+                        }} />
+                    )}
+                    {!urlToShow && label}
+                  </Button>
+                );
+              })}
+            </div>
+
+            <div className="tools-group">
+              {group.map(({ value }) => {
+                const { keyCode } = TOOLS[value];
+
+                return (
+                  <div key={keyCode} className="key">
+                    {String.fromCharCode(keyCode)}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ))}
       </div>
