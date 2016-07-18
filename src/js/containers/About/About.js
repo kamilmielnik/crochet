@@ -85,6 +85,10 @@ class About extends Component {
                 (zmiana wpłynie również na <strong>wygląd wydruku</strong>)
               </li>
               <li>
+                możesz aktywować narzędzie <strong>Podświetl puste</strong>, aby wyróżnić na kanwie komórki,
+                w których nie umieszczono wzorka (kolejne kliknięcie na narzędzie dezaktywuje je)
+              </li>
+              <li>
                 Twoje projekty są przechowywane na <strong>Twoim komputerze</strong>,
                 w Twojej przeglądarce internetowej
               </li>
@@ -92,7 +96,7 @@ class About extends Component {
                 możesz zapisać swój projekt jako obrazek w formacie <strong>PNG</strong> (do druku)
               </li>
               <li>
-                możesz <strong>eksportować</strong> swój projekt do pliku,
+                możesz <strong>eksportować</strong> swój projekt do pliku (w formacie <strong>JSON</strong>),
                 aby <strong>importować</strong> go na innym komputerze, albo
                 w celu utworzenia kopii zapasowej
               </li>

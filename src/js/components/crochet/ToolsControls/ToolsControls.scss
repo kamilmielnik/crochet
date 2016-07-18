@@ -55,6 +55,8 @@ $pattern-size: 24px;
       text-align: center;
       text-transform: uppercase;
       color: $darken;
+      cursor: default;
+      user-select: none;
     }
   }
 }

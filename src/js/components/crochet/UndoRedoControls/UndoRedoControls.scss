@@ -30,6 +30,8 @@
     text-align: center;
     text-transform: uppercase;
     color: $darken;
+    cursor: default;
+    user-select: none;
 
     .is-disabled {
       opacity: $opacity-disabled;

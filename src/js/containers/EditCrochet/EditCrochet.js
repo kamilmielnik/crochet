@@ -74,25 +74,34 @@ class EditCrochet extends Component {
   };
 
   onDownloadImage = () => {
-    const projectName = this.getProjectName();
-    const crochetElement = document.getElementsByClassName('crochet')[0];
-    html2canvas(crochetElement, {
-      onrendered: canvas => {
-        canvas.toBlob(blob => {
-          saveAs(blob, fileNameNow(projectName, 'png'));
-        });
-      }
-    });
+    const { actions: { handleError } } = this.props;
+    try {
+      const projectName = this.getProjectName();
+      const crochetElement = document.getElementsByClassName('crochet')[0];
+      html2canvas(crochetElement, {
+        onrendered: canvas => {
+          canvas.toBlob(blob => {
+            saveAs(blob, fileNameNow(projectName, 'png'));
+          });
+        }
+      });
+    } catch (error) {
+      handleError(`${error.toString()}\n${error.stack}`);
+    }
   };
 
   onExport = () => {
-    const { crochet: { currentState: crochet } } = this.props;
-    const project = this.getProject();
-    const projectName = this.getProjectName();
-    const filename = `${projectName}.json`;
-    const data = { crochet, project };
-    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-    saveAs(blob, filename);
+    const { actions: { handleError }, crochet: { currentState: crochet } } = this.props;
+    try {
+      const project = this.getProject();
+      const projectName = this.getProjectName();
+      const filename = `${projectName}.json`;
+      const data = { crochet, project };
+      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+      saveAs(blob, filename);
+    } catch (error) {
+      handleError(`${error.toString()}\n${error.stack}`);
+    }
   };
 
   onGoToProjects = event => {
