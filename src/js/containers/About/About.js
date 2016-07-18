@@ -71,8 +71,9 @@ class About extends Component {
                 wiersze i kolumny mogą zostać usunięte tylko narzędziem <strong>Cofnij</strong>
               </li>
               <li>
-                możesz dowolnie zmieniać rozmiar komórek kanwy swojego projektu korzystając z narzędzia&nbsp;
-                <strong>Rozmiar komórki</strong> (zmiana wpłynie również na <strong>wygląd wydruku</strong>)
+                możesz dowolnie zmieniać rozmiar komórek kanwy swojego projektu korzystając z przycisków&nbsp;
+                <strong>"+"</strong> i <strong>"-"</strong> (plus i minus) u góry ekranu
+                (zmiana wpłynie również na <strong>wygląd wydruku</strong>)
               </li>
               <li>
                 Twoje projekty są przechowywane na <strong>Twoim komputerze</strong>,
