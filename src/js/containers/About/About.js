@@ -25,6 +25,7 @@ class About extends Component {
       <Menu controls={controls} title="O programie">
         <section className="about">
           <h1>Witaj w <strong>Szydełku</strong>.</h1>
+          <span className="version">wersja 1.0.0</span>
 
           <div>
             <div className="description">

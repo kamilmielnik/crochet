@@ -4,6 +4,13 @@
 .about {
   text-align: center;
 
+  .version {
+    position: relative;
+    top: -$spacing-xl;
+    font-weight: bold;
+    font-size: $font-size-xxs;
+  }
+
   .description {
     padding-top: $spacing-xs;
   }
