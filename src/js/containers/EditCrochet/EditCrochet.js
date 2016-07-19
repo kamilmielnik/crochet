@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import html2canvas from 'html2canvas';
-import { saveAs } from 'filesaver.js';
-import { bindActionsAndConnect, fileNameNow } from 'utils';
+
+import { bindActionsAndConnect } from 'utils';
 import { CROTCHET_SIZE_OPTIONS, PERSISTENCE_TIMEOUT } from 'constants';
 import { canApplyTool } from 'models/collisions';
 import { Link } from 'react-router';
+import CanvasControls from '../CanvasControls/CanvasControls';
 import Menu from '../Menu/Menu';
 import ToolBar from '../ToolBar/ToolBar';
-import { Button, NumberPicker } from 'components/ui';
+import { Button, Dropdown, NumberPicker } from 'components/ui';
 import { Crochet } from 'components/crochet';
 import './EditCrochet.scss';
 
@@ -73,37 +73,6 @@ class EditCrochet extends Component {
     crochetCellSizeChange(cellSize);
   };
 
-  onDownloadImage = () => {
-    const { actions: { handleError } } = this.props;
-    try {
-      const projectName = this.getProjectName();
-      const crochetElement = document.getElementsByClassName('crochet')[0];
-      html2canvas(crochetElement, {
-        onrendered: canvas => {
-          canvas.toBlob(blob => {
-            saveAs(blob, fileNameNow(projectName, 'png'));
-          });
-        }
-      });
-    } catch (error) {
-      handleError(`${error.toString()}\n${error.stack}`);
-    }
-  };
-
-  onExport = () => {
-    const { actions: { handleError }, crochet: { currentState: crochet } } = this.props;
-    try {
-      const project = this.getProject();
-      const projectName = this.getProjectName();
-      const filename = `${projectName}.json`;
-      const data = { crochet, project };
-      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-      saveAs(blob, filename);
-    } catch (error) {
-      handleError(`${error.toString()}\n${error.stack}`);
-    }
-  };
-
   onGoToProjects = event => {
     event.preventDefault();
     this.componentWillUnmount();
@@ -115,15 +84,25 @@ class EditCrochet extends Component {
     crochetSave(id, crochet, () => redirect('/projekty'));
   };
 
-  getProjectName = () => {
-    const { name } = this.getProject();
-    return name;
+  onToolsDropdownHide = () => {
+    const { actions: { toolsDropdownHide } } = this.props;
+    toolsDropdownHide();
+  };
+
+  onToolsDropdownShow = () => {
+    const { actions: { toolsDropdownShow } } = this.props;
+    toolsDropdownShow();
   };
 
   getProject = () => {
     const { crochet: { currentState: { projectId } }, projects } = this.props;
     const project = projects.find(({ id }) => id === projectId) || {};
     return project;
+  };
+
+  getProjectName = () => {
+    const { name } = this.getProject();
+    return name;
   };
 
   render() {
@@ -136,7 +115,8 @@ class EditCrochet extends Component {
           cellSize,
           areEmptyCellsHighlighted
         }
-      }
+      },
+      tool: { isToolsDropdownShown }
     } = this.props;
 
     const projectName = this.getProjectName();
@@ -148,13 +128,13 @@ class EditCrochet extends Component {
           values={CROTCHET_SIZE_OPTIONS}
           onChange={this.onCellSizeChange} />
 
-        <Button onClick={this.onDownloadImage}>
-          Pobierz do druku
-        </Button>
-
-        <Button onClick={this.onExport}>
-          Eksportuj
-        </Button>
+        <Dropdown
+          label="Więcej narzędzi ..."
+          isShown={isToolsDropdownShown}
+          onHide={this.onToolsDropdownHide}
+          onShow={this.onToolsDropdownShow}>
+          <CanvasControls projectName={projectName} />
+        </Dropdown>
 
         <Link to="/projekty" onClick={this.onGoToProjects}>
           <Button>
@@ -169,7 +149,6 @@ class EditCrochet extends Component {
         <div className="edit-crochet">
           <div className="tools-container">
             <ToolBar
-              areEmptyCellsHighlighted={areEmptyCellsHighlighted}
               canUndo={pastActions.length > 0}
               canRedo={futureActions.length > 0}
               cellSize={cellSize} />

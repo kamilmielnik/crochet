@@ -22,6 +22,8 @@ import {
   NEW_PROJECT_RESET,
   PROJECTS_LOAD,
   TOOL_CHOOSE,
+  TOOLS_DROPDOWN_HIDE,
+  TOOLS_DROPDOWN_SHOW,
   UNDOABLE_REDO,
   UNDOABLE_UNDO
 } from 'constants/actionTypes';
@@ -258,6 +260,18 @@ export function toolChoose(toolId) {
   return {
     type: TOOL_CHOOSE,
     toolId
+  };
+}
+
+export function toolsDropdownHide() {
+  return {
+    type: TOOLS_DROPDOWN_HIDE
+  };
+}
+
+export function toolsDropdownShow() {
+  return {
+    type: TOOLS_DROPDOWN_SHOW
   };
 }
 

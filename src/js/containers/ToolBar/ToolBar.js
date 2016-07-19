@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import _ from 'underscore';
 import { KEY_Y, KEY_Z, TOOLS } from 'constants';
 import { bindActionsAndConnect } from 'utils';
-import { CanvasControls, ToolsControls, UndoRedoControls } from 'components/crochet';
+import { ToolsControls, UndoRedoControls } from 'components/crochet';
 import './ToolBar.scss';
 
 class ToolBar extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired,
-    areEmptyCellsHighlighted: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     canUndo: PropTypes.bool.isRequired,
     tool: PropTypes.object.isRequired
@@ -20,26 +19,6 @@ class ToolBar extends Component {
 
   componentWillUnmount = () => {
     document.removeEventListener('keydown', this.onKeyDown);
-  };
-
-  onAdd10Rows = () => {
-    const { actions: { crochetAddRows } } = this.props;
-    crochetAddRows(10);
-  };
-
-  onAddRow = () => {
-    const { actions: { crochetAddRows } } = this.props;
-    crochetAddRows(1);
-  };
-
-  onAdd10Columns = () => {
-    const { actions: { crochetAddColumns } } = this.props;
-    crochetAddColumns(10);
-  };
-
-  onAddColumn = () => {
-    const { actions: { crochetAddColumns } } = this.props;
-    crochetAddColumns(1);
   };
 
   onKeyDown = event => {
@@ -62,21 +41,6 @@ class ToolBar extends Component {
     }
   };
 
-  onHighlightEmpty = () => {
-    const { actions: { crochetHighlightEmpty }, areEmptyCellsHighlighted } = this.props;
-    crochetHighlightEmpty(!areEmptyCellsHighlighted);
-  };
-
-  onMirrorHorizontal = () => {
-    const { actions: { crochetMirrorHorizontal } } = this.props;
-    crochetMirrorHorizontal();
-  };
-
-  onMirrorVertical = () => {
-    const { actions: { crochetMirrorVertical } } = this.props;
-    crochetMirrorVertical();
-  };
-
   onRedo = () => {
     const { actions: { undoableRedo } } = this.props;
     undoableRedo();
@@ -90,7 +54,6 @@ class ToolBar extends Component {
   render() {
     const {
       actions: { toolChoose },
-      areEmptyCellsHighlighted,
       canRedo,
       canUndo,
       tool: { toolId }
@@ -107,16 +70,6 @@ class ToolBar extends Component {
         <ToolsControls
           toolId={toolId}
           onToolClick={toolChoose} />
-
-        <CanvasControls
-          areEmptyCellsHighlighted={areEmptyCellsHighlighted}
-          onAdd10Columns={this.onAdd10Columns}
-          onAdd10Rows={this.onAdd10Rows}
-          onAddColumn={this.onAddColumn}
-          onAddRow={this.onAddRow}
-          onHighlightEmpty={this.onHighlightEmpty}
-          onMirrorHorizontal={this.onMirrorHorizontal}
-          onMirrorVertical={this.onMirrorVertical} />
       </div>
     );
   }

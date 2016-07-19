@@ -21,6 +21,10 @@
 
     &:active, &.active {
       background-color: darken($color-primary, 20%);
+
+      &:hover {
+        background-color: darken($color-primary, 10%);
+      }
     }
   }
 
@@ -33,6 +37,10 @@
 
     &:active, &.active {
       background-color: darken($color-secondary, 20%);
+
+      &:hover {
+        background-color: darken($color-secondary, 10%);
+      }
     }
   }
 
@@ -46,6 +54,10 @@
 
     &:active, &.active {
       background-color: darken($red-dark, 20%);
+
+      &:hover {
+        background-color: darken($red-dark, 10%);
+      }
     }
   }
 

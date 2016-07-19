@@ -1,4 +1,3 @@
-export CanvasControls from './CanvasControls/CanvasControls';
 export Crochet from './Crochet/Crochet';
 export CrochetCell from './CrochetCell/CrochetCell';
 export CrochetGrid from './CrochetGrid/CrochetGrid';

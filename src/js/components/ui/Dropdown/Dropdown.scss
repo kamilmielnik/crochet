@@ -1,0 +1,38 @@
+@import '~styles/variables.scss';
+@import '~styles/mixins.scss';
+
+.dropdown {
+  position: relative;
+
+  .trigger {
+    .button {
+      border-radius: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .dropdown-items {
+    display: none;
+    position: fixed;
+    top: 47px;
+    background-color: $color-secondary;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid $color-primary;
+
+    .button {
+      margin: 0;
+      border-radius: 0;
+      border-bottom: 1px solid $color-secondary-light;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  &.is-shown {
+    .dropdown-items {
+      display: block;
+    }
+  }
+}
