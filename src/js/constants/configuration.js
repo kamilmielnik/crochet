@@ -7,7 +7,7 @@ export const UNDO_HISTORY_LIMIT = 500;
 export const PERSISTENCE_TIMEOUT = 5000;
 
 export const CROCHET_SIZE_MIN = 8;
-export const CROCHET_SIZE_DEFAULT = 16;
+export const CROCHET_SIZE_DEFAULT = 17;
 export const CROCHET_SIZE_MAX = 30;
 export const CROTCHET_SIZE_OPTIONS = _.range(CROCHET_SIZE_MIN, CROCHET_SIZE_MAX + 1);
 

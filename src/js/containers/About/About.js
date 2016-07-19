@@ -52,7 +52,7 @@ class About extends Component {
                 <strong>kliknij</strong> myszką na komórkę kanwy aby umieścić wybrany wzór
               </li>
               <li>
-                <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby ciągle
+                <strong>kliknij</strong> na kanwie i <strong>przeciągnij</strong> myszkę aby nieprzerwanie
                 umieszczać wybrany wzór
               </li>
               <li>
@@ -99,6 +99,10 @@ class About extends Component {
                 możesz <strong>eksportować</strong> swój projekt do pliku (w formacie <strong>JSON</strong>),
                 aby <strong>importować</strong> go na innym komputerze, albo
                 w celu utworzenia kopii zapasowej
+              </li>
+              <li>
+                część narzędzi dostępna jest dopiero po kliknięciu na przycisk&nbsp;
+                <strong>Więcej narzędzi ...</strong> u góry ekranu
               </li>
               <li className="danger">
                 <strong>uwaga</strong>: szybkość działania aplikacji jest
