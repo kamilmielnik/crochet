@@ -4,6 +4,7 @@ import {
   TOOL_NONE
 } from 'constants';
 import { push } from 'react-router-redux';
+import analytics from 'analytics';
 import storage from 'storage';
 import {
   CROCHET_ADD_COLUMNS,
@@ -216,6 +217,7 @@ export function projectNew(projectData, callback = _.noop) {
 
 export function crochetSave(id, crochet, callback = _.noop) {
   return dispatch => {
+    analytics.saveCrochet();
     storage.setItem(id, crochet);
     callback(dispatch);
   };
