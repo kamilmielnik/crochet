@@ -1,10 +1,13 @@
 {
-  "name": "Crochet",
+  "name": "crochet",
   "description": "Crochet",
   "version": "0.0.1",
   "author": "Kamil Mielnik",
   "license": "MIT",
   "keywords": [],
+  "engines": {
+    "node": ">=12"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kamilmielnik/crochet.git"
@@ -43,7 +46,7 @@
     "jsdom": "8.2.0",
     "json-loader": "0.5.4",
     "mocha": "2.4.5",
-    "node-sass": "3.6.0",
+    "node-sass": "7.0.3",
     "postcss-loader": "0.8.2",
     "react-addons-test-utils": "15.2.1",
     "react-hot-loader": "1.3.0",
